@@ -91,7 +91,7 @@ class Tests: FBSnapshotTestCase {
         // add delay since photos are added asynchronously
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.scrollTo(index: 19, callback: {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     self.scrollTo(index: 35, callback: {
                         let view = self.c!.view
                         self.FBSnapshotVerifyView(view!)
@@ -101,7 +101,7 @@ class Tests: FBSnapshotTestCase {
                 }
             })
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 2) { error in
             if let error = error {
                 XCTFail("waitForExpectationsWithTimeout errored: \(error)")
             }
