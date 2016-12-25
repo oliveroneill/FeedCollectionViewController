@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint FeedCollectionViewController.podspec' to ensure this is a
+# Be sure to run `pod lib lint ImageFeedCollectionViewController.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -7,9 +7,9 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'FeedCollectionViewController'
+  s.name             = 'ImageFeedCollectionViewController'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of FeedCollectionViewController.'
+  s.summary          = 'A short description of ImageFeedCollectionViewController.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -21,22 +21,24 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/<GITHUB_USERNAME>/FeedCollectionViewController'
+  s.homepage         = 'https://github.com/<GITHUB_USERNAME>/ImageFeedCollectionViewController'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Oliver ONeill' => 'oliveroneill04@gmail.com' }
-  s.source           = { :git => 'https://github.com/<GITHUB_USERNAME>/FeedCollectionViewController.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/<GITHUB_USERNAME>/ImageFeedCollectionViewController.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'FeedCollectionViewController/Classes/**/*'
+  s.source_files = 'ImageFeedCollectionViewController/Classes/**/*'
   
   # s.resource_bundles = {
-  #   'FeedCollectionViewController' => ['FeedCollectionViewController/Assets/*.png']
+  #   'ImageFeedCollectionViewController' => ['ImageFeedCollectionViewController/Assets/*.png']
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'IDMPhotoBrowser'
+  s.dependency 'FeedCollectionViewController'
 end

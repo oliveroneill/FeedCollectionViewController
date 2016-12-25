@@ -1,29 +1,134 @@
 import UIKit
 import XCTest
-import FeedCollectionViewController
+import FBSnapshotTestCase
+@testable import FeedCollectionViewController_Example
 
-class Tests: XCTestCase {
+// UIViewController+Extension
+extension UIViewController {
+    // used to initialise view controller for each test
+    func preloadView() {
+        _ = view
+    }
+}
+
+class Tests: FBSnapshotTestCase {
+    private var c: ColorFeedViewController?
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        // uncomment this line to record snapshots for test
+//         recordMode = true
+
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle(for: ColorFeedViewController.self))
+        c = storyboard.instantiateViewController(withIdentifier: "ColorFeedViewController") as? ColorFeedViewController
+        // we don't require a delay for the unit tests
+        c?.loadingDelay = 0
+        c?.imageDelay = 0
+        UIApplication.shared.keyWindow!.rootViewController = c
+        
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+    func scrollTo(index:Int, callback: @escaping (() -> Void)) {
+        self.c!.collectionView!.scrollToItem(at: IndexPath(item:index, section: 0), at: .top, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.c!.scrollViewDidEndDecelerating(self.c!.collectionView!)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.c!.scrollViewDidEndDecelerating(self.c!.collectionView!)
+                callback()
+            }
+        }
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
+
+    /**
+     * Test that the initial screen matches
+     */
+    func testInitialScreen() {
+        let expect = expectation(description: "Wait for data to load")
+        // add delay since photos are added asynchronously
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            let view = self.c!.view
+            self.FBSnapshotVerifyView(view!)
+            self.FBSnapshotVerifyLayer(view!.layer)
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
         }
     }
     
+    /**
+     * Test that scrolling down doesn't do anything strange
+     */
+    func testScroll() {
+        let expect = expectation(description: "Wait for data to load")
+        // add delay since photos are added asynchronously
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.scrollTo(index: 9, callback: {
+                let view = self.c!.view
+                self.FBSnapshotVerifyView(view!)
+                self.FBSnapshotVerifyLayer(view!.layer)
+                expect.fulfill()
+            })
+        }
+        waitForExpectations(timeout: 1) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+    }
+    
+    /**
+     * Test that scrolling down loads new images
+     */
+    func testScrollToNewScreen() {
+        let expect = expectation(description: "Wait for data to load")
+        // add delay since photos are added asynchronously
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.scrollTo(index: 19, callback: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                    self.scrollTo(index: 35, callback: {
+                        let view = self.c!.view
+                        self.FBSnapshotVerifyView(view!)
+                        self.FBSnapshotVerifyLayer(view!.layer)
+                        expect.fulfill()
+                    })
+                }
+            })
+        }
+        waitForExpectations(timeout: 1) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+    }
+    
+    /**
+     * Test that tapping on a cell opens the photo browser
+     */
+    func testTapOnCell() {
+        let expect = expectation(description: "Wait for data to load")
+        // add delay since photos are added asynchronously
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.c!.collectionView?.scrollToItem(at: IndexPath(item:19, section: 0), at: .top, animated: true)
+            self.c?.collectionView((self.c?.collectionView)!, didSelectItemAt: IndexPath(item: 10, section: 0))
+            DispatchQueue.main.async {
+                if let topController = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController {
+                    self.FBSnapshotVerifyView(topController.view!)
+                    self.FBSnapshotVerifyLayer(topController.view!.layer)
+                    expect.fulfill()
+                }
+            }
+        }
+        waitForExpectations(timeout: 1) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+    }
 }
