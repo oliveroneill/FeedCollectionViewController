@@ -9,36 +9,23 @@
 Pod::Spec.new do |s|
   s.name             = 'ImageFeedCollectionViewController'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of ImageFeedCollectionViewController.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
+  s.summary          = 'An extension on FeedCollectionViewController that is used for image feeds'
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+An extension on FeedCollectionViewController that is used for image feeds. This is used for infinite
+scrolling and loading images dynamically. This is inspired by scrolling through photos on Facebook or
+Instagram.
                        DESC
 
-  s.homepage         = 'https://github.com/<GITHUB_USERNAME>/ImageFeedCollectionViewController'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.homepage         = 'https://github.com/oliveroneill/ImageFeedCollectionViewController'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Oliver ONeill' => 'oliveroneill04@gmail.com' }
-  s.source           = { :git => 'https://github.com/<GITHUB_USERNAME>/ImageFeedCollectionViewController.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => 'https://github.com/oliveroneill/ImageFeedCollectionViewController.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'ImageFeedCollectionViewController/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'ImageFeedCollectionViewController' => ['ImageFeedCollectionViewController/Assets/*.png']
-  # }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
   s.dependency 'IDMPhotoBrowser'
   s.dependency 'FeedCollectionViewController'
 end
