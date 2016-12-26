@@ -17,10 +17,10 @@ scrolling and loading images dynamically. This is inspired by scrolling through 
 Instagram.
                        DESC
 
-  s.homepage         = 'https://github.com/oliveroneill/ImageFeedCollectionViewController'
+  s.homepage         = 'https://github.com/oliveroneill/FeedCollectionViewController'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Oliver ONeill' => 'oliveroneill04@gmail.com' }
-  s.source           = { :git => 'https://github.com/oliveroneill/ImageFeedCollectionViewController.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/oliveroneill/FeedCollectionViewController.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
 
