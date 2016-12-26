@@ -22,7 +22,7 @@ pod "FeedCollectionViewController"
 
 ## Author
 
-Oliver, oliver.o'neill@interferex.com
+Oliver O'Neill
 
 ## License
 
