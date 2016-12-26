@@ -18,6 +18,6 @@ Instagram.
 
   s.source_files = 'ImageFeedCollectionViewController/Classes/**/*'
 
-  s.dependency 'IDMPhotoBrowser'
+  s.dependency 'OOPhotoBrowser'
   s.dependency 'FeedCollectionViewController'
 end

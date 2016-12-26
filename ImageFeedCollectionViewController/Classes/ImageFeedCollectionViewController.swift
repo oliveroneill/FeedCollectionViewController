@@ -8,7 +8,7 @@
 
 import UIKit
 import FeedCollectionViewController
-import IDMPhotoBrowser
+import OOPhotoBrowser
 
 /**
  * Subclass this for an infinite scrolling image feed with image browser built

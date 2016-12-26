@@ -8,7 +8,7 @@
 
 import UIKit
 import FeedCollectionViewController
-import IDMPhotoBrowser
+import OOPhotoBrowser
 
 class IDMCellBrowser: CellBrowser {
     private var browser: IDMBrowserDelegate

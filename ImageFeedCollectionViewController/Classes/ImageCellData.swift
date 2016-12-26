@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import IDMPhotoBrowser
+import OOPhotoBrowser
 import FeedCollectionViewController
 
 open class ImageCellData: IDMPhoto, CellData {

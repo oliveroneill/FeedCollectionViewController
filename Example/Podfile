@@ -1,8 +1,6 @@
 use_frameworks!
 
 target 'FeedCollectionViewController_Example' do
-  pod 'FeedCollectionViewController', :path => '../'
-  pod 'IDMPhotoBrowser', :git => 'https://github.com/oliveroneill/IDMPhotoBrowser.git'
   pod 'ImageFeedCollectionViewController', :path => '../'
 
   target 'FeedCollectionViewController_Tests' do
