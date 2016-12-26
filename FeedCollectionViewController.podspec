@@ -1,15 +1,7 @@
-#
-# Be sure to run `pod lib lint FeedCollectionViewController.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = 'FeedCollectionViewController'
   s.version          = '0.1.0'
-  s.summary          = 'A wrapper around UICollectionView for loading content as its needed'
+  s.summary          = 'A wrapper around UICollectionView for Facebook/Instagram inspired feeds'
 
   s.description      = <<-DESC
 A wrapper around UICollectionView used for infinite scrolling and loading content dynamically.
