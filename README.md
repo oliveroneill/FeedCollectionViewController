@@ -10,17 +10,12 @@ on Facebook or Instagram.
 
 FeedCollectionViewController is a generic interface for setting up a simple
 feed, whereas ImageFeedCollectionViewController is specifically set up for
-images. ImageFeedCollectionViewController uses IDMPhotoBrowser, so that tapping
-on images lets you scroll through photos indefinitely.
+images. ImageFeedCollectionViewController uses a fork of [IDMPhotoBrowser](https://github.com/ideaismobile/IDMPhotoBrowser),
+so that tapping on images lets you scroll through photos indefinitely.
 
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
-ImageFeedCollectionViewController requires [a specific fork of IDMPhotoBrowser](https://github.com/oliveroneill/IDMPhotoBrowser),
-as it required specific modifications. See installation instructions for
-ImageFeedCollectionViewController below.
 
 ## Installation
 
@@ -35,12 +30,8 @@ To install ImageFeedCollectionViewController, simply add the following line to
 your Podfile:
 
 ```ruby
-pod 'IDMPhotoBrowser', :git => 'https://github.com/oliveroneill/IDMPhotoBrowser.git'
 pod "ImageFeedCollectionViewController"
 ```
-
-Including the specific fork of IDMPhotoBrowser is required due to modifications
-to allow infinite scrolling through photos.
 
 ## Usage
 
