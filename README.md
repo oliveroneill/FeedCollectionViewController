@@ -10,7 +10,8 @@ on Facebook or Instagram.
 
 FeedCollectionViewController is a generic interface for setting up a simple
 feed, whereas ImageFeedCollectionViewController is specifically set up for
-images. ImageFeedCollectionViewController uses a fork of [IDMPhotoBrowser](https://github.com/ideaismobile/IDMPhotoBrowser),
+images. ImageFeedCollectionViewController uses a [fork](https://github.com/oliveroneill/OOPhotoBrowser)
+of [IDMPhotoBrowser](https://github.com/ideaismobile/IDMPhotoBrowser),
 so that tapping on images lets you scroll through photos indefinitely.
 
 ## Example
