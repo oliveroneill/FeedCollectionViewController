@@ -99,6 +99,9 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
             // TODO: figure out how to know when data is
             // populated
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100), execute: {
+                // reset counters here so that data is completely refreshed
+                self.start = -1
+                self.end = -1
                 self.showVisibleImages()
             })
             
@@ -134,7 +137,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
         // Dispose of any resources that can be recreated.
     }
     
-    final func refresh() {
+    public final func refresh() {
         refreshControl.beginRefreshing()
         getCells(start: 0, callback: { cellData in
             self.cellData = cellData
@@ -147,6 +150,9 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
             // TODO: figure out how to know when data is
             // populated
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100), execute: {
+                // reset counters here so that data is completely refreshed
+                self.start = -1
+                self.end = -1
                 self.showVisibleImages()
             })
         })

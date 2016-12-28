@@ -52,6 +52,10 @@ open class ColorFeedViewController: ImageFeedCollectionViewController {
         }
     }
     
+    open func refreshContent() {
+        self.refresh()
+    }
+    
     override open func loadImageCell(cellView: UICollectionViewCell, cell: ImageCellData) {
         if let cellView = cellView as? ImageCollectionViewCell,
             let cell = cell as? ColorImageCellData {

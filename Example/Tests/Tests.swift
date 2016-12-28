@@ -63,6 +63,28 @@ class Tests: FBSnapshotTestCase {
     }
     
     /**
+     * Test that the initial screen matches
+     */
+    func testRefresh() {
+        let expect = expectation(description: "Wait for data to load")
+        // add delay since photos are added asynchronously
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.c!.refreshContent()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                let view = self.c!.view
+                self.FBSnapshotVerifyView(view!)
+                self.FBSnapshotVerifyLayer(view!.layer)
+                expect.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 1) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+    }
+    
+    /**
      * Test that scrolling down doesn't do anything strange
      */
     func testScroll() {
