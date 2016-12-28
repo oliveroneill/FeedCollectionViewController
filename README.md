@@ -1,6 +1,5 @@
 # FeedCollectionViewController
 
-<!-- [![Build Status](https://travis-ci.org/oliveroneill/FeedCollectionViewController.svg?branch=master)](https://travis-ci.org/oliveroneill/FeedCollectionViewController) -->
 [![Version](https://img.shields.io/cocoapods/v/FeedCollectionViewController.svg?style=flat)](http://cocoapods.org/pods/FeedCollectionViewController)
 [![License](https://img.shields.io/cocoapods/l/FeedCollectionViewController.svg?style=flat)](http://cocoapods.org/pods/FeedCollectionViewController)
 [![Platform](https://img.shields.io/cocoapods/p/FeedCollectionViewController.svg?style=flat)](http://cocoapods.org/pods/FeedCollectionViewController)
@@ -8,6 +7,10 @@
 A simple interface for creating data feeds so that data can be loaded
 dynamically as the user scrolls. This is inspired by scrolling through photos
 on Facebook or Instagram.
+
+![Refresh Content by swiping down](Images/refresh.gif)    ![Images load as you scroll](Images/loads_as_scroll.gif)     ![Load bulk content when the user reaches the bottom of the feed](infinite_scroll.gif)    ![Scroll through photos one at a time by tapping them](Images/view_photos.gif)
+
+<sup>Images taken from the example project that uses colours in place of real content.</sup>
 
 FeedCollectionViewController is a generic interface for setting up a simple
 feed, whereas ImageFeedCollectionViewController is specifically set up for
@@ -18,6 +21,8 @@ so that tapping on images lets you scroll through photos indefinitely.
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
+The example project demonstrates the functionality without using any actual content, it creates
+coloured images to illustrate its use with a large amount of content.
 
 ## Installation
 
