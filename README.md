@@ -8,7 +8,7 @@ A simple interface for creating data feeds so that data can be loaded
 dynamically as the user scrolls. This is inspired by scrolling through photos
 on Facebook or Instagram.
 
-![Refresh Content by swiping down](Images/refresh.gif)    ![Images load as you scroll](Images/loads_as_scroll.gif)     ![Load bulk content when the user reaches the bottom of the feed](infinite_scroll.gif)    ![Scroll through photos one at a time by tapping them](Images/view_photos.gif)
+![Refresh Content by swiping down](Images/refresh.gif)    ![Images load as you scroll](Images/loads_as_scroll.gif)     ![Load bulk content when the user reaches the bottom of the feed](Images/infinite_scroll.gif)    ![Scroll through photos one at a time by tapping them](Images/view_photos.gif)
 
 <sup>Images taken from the example project that uses colours in place of real content.</sup>
 
