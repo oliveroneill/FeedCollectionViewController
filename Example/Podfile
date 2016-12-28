@@ -1,6 +1,7 @@
 use_frameworks!
 
 target 'FeedCollectionViewController_Example' do
+  pod 'FeedCollectionViewController', :path => '../'
   pod 'ImageFeedCollectionViewController', :path => '../'
 
   target 'FeedCollectionViewController_Tests' do
