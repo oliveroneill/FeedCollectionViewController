@@ -10,5 +10,5 @@ language: objective-c
 # - gem install cocoapods # Since Travis is not always on latest version
 # - pod install --project-directory=Example
 script:
-- set -o pipefail && xcodebuild test -workspace Example/FeedCollectionViewController.xcworkspace -scheme FeedCollectionViewController-Example -sdk iphonesimulator10.2 -destination platform='iOS Simulator',OS=10.2,name='iPhone SE' ONLY_ACTIVE_ARCH=NO | xcpretty
+- set -o pipefail && xcodebuild test -workspace Example/FeedCollectionViewController.xcworkspace -scheme FeedCollectionViewController-Example -sdk iphonesimulator10.2 -destination platform='iOS Simulator',id='63A0BA5F-3911-496F-BF2E-512830B4AD7F',OS=10.2,name='iPhone SE' ONLY_ACTIVE_ARCH=NO | xcpretty
 - pod lib lint --allow-warnings
