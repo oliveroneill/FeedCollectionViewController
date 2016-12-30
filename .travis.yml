@@ -19,7 +19,7 @@ env:
 
 before_install:
 - gem install cocoapods # Since Travis is not always on latest version
-- gem install second_curtain -v 0.2
+- gem install second_curtain
 - pod repo update
 - pod install --project-directory=Example
 script:
