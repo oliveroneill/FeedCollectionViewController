@@ -1,5 +1,6 @@
 # FeedCollectionViewController
 
+[![Build Status](https://travis-ci.org/oliveroneill/FeedCollectionViewController.svg?branch=master)](https://travis-ci.org/oliveroneill/FeedCollectionViewController)
 [![Version](https://img.shields.io/cocoapods/v/FeedCollectionViewController.svg?style=flat)](http://cocoapods.org/pods/FeedCollectionViewController)
 [![License](https://img.shields.io/cocoapods/l/FeedCollectionViewController.svg?style=flat)](http://cocoapods.org/pods/FeedCollectionViewController)
 [![Platform](https://img.shields.io/cocoapods/p/FeedCollectionViewController.svg?style=flat)](http://cocoapods.org/pods/FeedCollectionViewController)
