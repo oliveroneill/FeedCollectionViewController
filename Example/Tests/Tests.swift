@@ -55,7 +55,7 @@ class Tests: FBSnapshotTestCase {
             self.FBSnapshotVerifyLayer(view!.layer)
             expect.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 10) { error in
             if let error = error {
                 XCTFail("waitForExpectationsWithTimeout errored: \(error)")
             }
@@ -77,7 +77,7 @@ class Tests: FBSnapshotTestCase {
                 expect.fulfill()
             }
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 10) { error in
             if let error = error {
                 XCTFail("waitForExpectationsWithTimeout errored: \(error)")
             }
@@ -98,7 +98,7 @@ class Tests: FBSnapshotTestCase {
                 expect.fulfill()
             })
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 10) { error in
             if let error = error {
                 XCTFail("waitForExpectationsWithTimeout errored: \(error)")
             }
@@ -123,7 +123,7 @@ class Tests: FBSnapshotTestCase {
                 }
             })
         }
-        waitForExpectations(timeout: 2) { error in
+        waitForExpectations(timeout: 10) { error in
             if let error = error {
                 XCTFail("waitForExpectationsWithTimeout errored: \(error)")
             }
@@ -147,7 +147,7 @@ class Tests: FBSnapshotTestCase {
                 }
             }
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 10) { error in
             if let error = error {
                 XCTFail("waitForExpectationsWithTimeout errored: \(error)")
             }
