@@ -34,9 +34,9 @@ class Tests: FBSnapshotTestCase {
     
     func scrollTo(index:Int, callback: @escaping (() -> Void)) {
         self.c!.collectionView!.scrollToItem(at: IndexPath(item:index, section: 0), at: .top, animated: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.c!.scrollViewDidEndDecelerating(self.c!.collectionView!)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.c!.scrollViewDidEndDecelerating(self.c!.collectionView!)
                 callback()
             }
@@ -49,7 +49,7 @@ class Tests: FBSnapshotTestCase {
     func testInitialScreen() {
         let expect = expectation(description: "Wait for data to load")
         // add delay since photos are added asynchronously
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             let view = self.c!.view
             self.FBSnapshotVerifyView(view!)
             self.FBSnapshotVerifyLayer(view!.layer)
@@ -70,7 +70,7 @@ class Tests: FBSnapshotTestCase {
         // add delay since photos are added asynchronously
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.c!.refreshContent()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 let view = self.c!.view
                 self.FBSnapshotVerifyView(view!)
                 self.FBSnapshotVerifyLayer(view!.layer)
