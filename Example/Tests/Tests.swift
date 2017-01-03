@@ -17,7 +17,7 @@ class Tests: FBSnapshotTestCase {
     override func setUp() {
         super.setUp()
         // uncomment this line to record snapshots for test
-//         recordMode = true
+        // recordMode = true
 
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle(for: ColorFeedViewController.self))
         c = storyboard.instantiateViewController(withIdentifier: "ColorFeedViewController") as? ColorFeedViewController

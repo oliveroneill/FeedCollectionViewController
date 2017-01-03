@@ -61,5 +61,57 @@
             </objects>
             <point key="canvasLocation" x="800.79999999999995" y="175.86206896551727"/>
         </scene>
+        <!--Color Caption Feed View Controller-->
+        <scene sceneID="qGx-ft-pET">
+            <objects>
+                <collectionViewController storyboardIdentifier="ColorCaptionFeedViewController" id="nst-II-Xwh" customClass="ColorCaptionFeedViewController" customModule="FeedCollectionViewController_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="PUB-m5-6bz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6ss-vW-YUw">
+                            <size key="itemSize" width="106" height="93"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExampleCell" id="4E2-hP-IGL" customClass="ImageCollectionViewCell" customModule="FeedCollectionViewController_Example" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="106" height="93"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="106" height="93"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tQL-7f-iyD">
+                                            <rect key="frame" x="0.0" y="0.0" width="106" height="93"/>
+                                        </imageView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="tQL-7f-iyD" firstAttribute="leading" secondItem="4E2-hP-IGL" secondAttribute="leading" id="IkV-mg-uKa"/>
+                                    <constraint firstAttribute="bottom" secondItem="tQL-7f-iyD" secondAttribute="bottom" id="TQa-x1-ABn"/>
+                                    <constraint firstItem="tQL-7f-iyD" firstAttribute="leading" secondItem="4E2-hP-IGL" secondAttribute="leading" id="ZQP-PG-jgl"/>
+                                    <constraint firstAttribute="trailing" secondItem="tQL-7f-iyD" secondAttribute="trailing" id="cYC-gD-Qii"/>
+                                    <constraint firstItem="tQL-7f-iyD" firstAttribute="top" secondItem="4E2-hP-IGL" secondAttribute="top" id="hgL-zQ-lh8"/>
+                                    <constraint firstItem="tQL-7f-iyD" firstAttribute="top" secondItem="4E2-hP-IGL" secondAttribute="top" id="oBg-xr-lU4"/>
+                                    <constraint firstAttribute="bottom" secondItem="tQL-7f-iyD" secondAttribute="bottom" id="rug-hE-PRx"/>
+                                    <constraint firstAttribute="trailing" secondItem="tQL-7f-iyD" secondAttribute="trailing" id="yAt-aq-GHv"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="tQL-7f-iyD" id="r73-NP-V45"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="nst-II-Xwh" id="4EZ-jh-Xqb"/>
+                            <outlet property="delegate" destination="nst-II-Xwh" id="nd6-4x-pNk"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CKZ-hh-XsE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1654" y="163"/>
+        </scene>
     </scenes>
 </document>

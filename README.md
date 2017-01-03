@@ -47,7 +47,7 @@ The set up is quite similar to `UICollectionViewController`, you must specify a
 reuse identifier and a `UICollectionViewCell` that should take its data from an
 implemented `CellData`.
 
-`FeedCollectionViewController`:
+FeedCollectionViewController:
 
 ``` swift
     open func getReuseIdentifier(cell:CellData) -> String {
@@ -64,7 +64,7 @@ implemented `CellData`.
     }
 ```
 
-`ImageFeedCollectionViewController`:
+ImageFeedCollectionViewController:
 
 ``` swift
     open func getImageReuseIdentifier(cell: ImageCellData) -> String {
@@ -80,7 +80,18 @@ implemented `CellData`.
         // load the cell (ie. a thumbnail) since it's now actually shown
     }
 ```
+To customise views in the ImageFeedCollectionViewController, you must
+implement `SingleImageView` and override relevant methods. The relevant
+methods are the same as those in `IDMCaptionView`.
+``` swift
+    open override func setupCaption() {
+        // Setup caption views
+    }
 
+    open override func sizeThatFits(_ size: CGSize) -> CGSize {
+        // Return the height of the view, the width will be ignored
+    }
+```
 
 ## Testing
 Testing is done through FBSnapshotTestCase, there are test result files included
@@ -90,9 +101,7 @@ device by enabling `recordMode` in `setUp()` and then re-running the test with
 it off.
 
 ## Todo
-- Add default image for 404s
-- Add ability to modify the single image view
-- Better tests
+- Better tests. Currently I've only implemented snapshot tests
 
 ## Author
 

@@ -18,7 +18,7 @@ import OOPhotoBrowser
  * To use this class you must override: `getImageReuseIdentifier`,
  * `getImageCells` and `loadImageCell`
  */
-open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMPhotoDataSource {
+open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMPhotoDataSource, IDMPhotoBrowserDelegate {
     open func getImageReuseIdentifier(cell: ImageCellData) -> String {
         preconditionFailure("getImageReuseIdentifier must be overridden")
     }
@@ -29,6 +29,10 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
 
     open func loadImageCell(cellView: UICollectionViewCell, cell:ImageCellData) {
         preconditionFailure("loadImageCell must be overridden")
+    }
+    
+    open func getSingleImageView(cell:ImageCellData) -> SingleImageView {
+        return SingleImageView(cell: cell)
     }
     
     // MARK: FeedCollectionViewController methods
@@ -55,6 +59,7 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
     override open func didSelectCell(index:Int, cell:CellData) {
         let browser = IDMPhotoBrowser(dataSource: self)
         browser?.setInitialPageIndex(UInt(index))
+        browser?.delegate = self
         self.present(browser!, animated: true, completion: {})
     }
     
@@ -69,5 +74,15 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
             cellBrowser = IDMCellBrowser(browser: b)
         }
         super.loadMoreImages(browser: cellBrowser)
+    }
+    
+    // MARK: IDMPhotoBrowserDelegate methods
+    public func photoBrowser(_ photoBrowser: IDMPhotoBrowser!, captionViewForPhotoAt index: UInt) -> IDMCaptionView! {
+        if let cell = super.getPhotos()[Int(index)] as? ImageCellData {
+            if cell.caption != nil {
+                return getSingleImageView(cell: cell)
+            }
+        }
+        return nil
     }
 }
