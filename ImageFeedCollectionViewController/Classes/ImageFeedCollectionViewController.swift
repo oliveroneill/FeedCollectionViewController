@@ -37,7 +37,7 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
 
     // Override this to receive alerts when an image fails to load while in
     // IDMPhotoBrowser
-    open func imageFailed(cell:ImageCellData) {}
+    open func imageFailed(cell:ImageCellData, imageView:UIImageView) {}
 
     // MARK: FeedCollectionViewController methods
 
@@ -89,10 +89,10 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
         }
         return nil
     }
-
-    public func photoBrowser(_ photoBrowser: IDMPhotoBrowser!, imageFailed index: UInt) {
+    
+    public func photoBrowser(_ photoBrowser: IDMPhotoBrowser!, imageFailed index: UInt, imageView: IDMTapDetectingImageView!) {
         if let cell = super.getPhotos()[Int(index)] as? ImageCellData {
-            imageFailed(cell: cell)
+            imageFailed(cell: cell, imageView:imageView)
         }
     }
 }

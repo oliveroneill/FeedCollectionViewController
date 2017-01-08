@@ -62,4 +62,7 @@ open class ColorFeedViewController: ImageFeedCollectionViewController {
             cellView.setImage(img: cell)
         }
     }
+    
+    open override func imageFailed(cell: ImageCellData, imageView: UIImageView) {
+    }
 }
