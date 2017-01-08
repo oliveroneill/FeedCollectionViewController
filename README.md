@@ -93,6 +93,9 @@ methods are the same as those in `IDMCaptionView`.
     }
 ```
 
+To receive image download failures from the photo browser, you can override
+`imageFailed(cell:ImageCellData)`.
+
 ## Testing
 Testing is done through FBSnapshotTestCase, there are test result files included
 in `Example/Tests/ReferenceImages_64/FeedCollectionViewController_Tests.Tests`.

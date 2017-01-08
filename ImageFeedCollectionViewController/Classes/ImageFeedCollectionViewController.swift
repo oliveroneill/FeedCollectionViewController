@@ -34,7 +34,11 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
     open func getSingleImageView(cell:ImageCellData) -> SingleImageView {
         return SingleImageView(cell: cell)
     }
-    
+
+    // Override this to receive alerts when an image fails to load while in
+    // IDMPhotoBrowser
+    open func imageFailed(cell:ImageCellData) {}
+
     // MARK: FeedCollectionViewController methods
 
     open override func loadCell(cellView: UICollectionViewCell, cell: CellData) {
@@ -84,5 +88,11 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
             }
         }
         return nil
+    }
+
+    public func photoBrowser(_ photoBrowser: IDMPhotoBrowser!, imageFailed index: UInt) {
+        if let cell = super.getPhotos()[Int(index)] as? ImageCellData {
+            imageFailed(cell: cell)
+        }
     }
 }
