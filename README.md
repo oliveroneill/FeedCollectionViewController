@@ -92,9 +92,14 @@ methods are the same as those in `IDMCaptionView`.
         // Return the height of the view, the width will be ignored
     }
 ```
+To receive updates when the displayed photo changes, override `didShowPhoto(cell:ImageCellData)`
 
 To receive image download failures from the photo browser, you can override
 `imageFailed(cell:ImageCellData)`.
+
+To customise the photo browser's toolbar, you can override
+`setupToolbar(toolbar:UIToolbar, cell:ImageCellData)` and make modifications
+as needed.
 
 ## Testing
 Testing is done through FBSnapshotTestCase, there are test result files included
