@@ -39,6 +39,10 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
     // IDMPhotoBrowser
     open func imageFailed(cell:ImageCellData, imageView:UIImageView) {}
 
+    open func setupToolbar(toolbar:UIToolbar, cell:ImageCellData) {}
+    
+    open func didShowPhoto(cell:ImageCellData) {}
+
     // MARK: FeedCollectionViewController methods
 
     open override func loadCell(cellView: UICollectionViewCell, cell: CellData) {
@@ -93,6 +97,18 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
     public func photoBrowser(_ photoBrowser: IDMPhotoBrowser!, imageFailed index: UInt, imageView: IDMTapDetectingImageView!) {
         if let cell = super.getPhotos()[Int(index)] as? ImageCellData {
             imageFailed(cell: cell, imageView:imageView)
+        }
+    }
+
+    public func photoBrowser(_ photoBrowser: IDMPhotoBrowser!, setupToolbar index: UInt, toolbar: UIToolbar!) {
+        if let cell = super.getPhotos()[Int(index)] as? ImageCellData {
+            setupToolbar(toolbar: toolbar, cell: cell)
+        }
+    }
+    
+    public func photoBrowser(_ photoBrowser: IDMPhotoBrowser!, didShowPhotoAt index: UInt) {
+        if let cell = super.getPhotos()[Int(index)] as? ImageCellData {
+            didShowPhoto(cell: cell)
         }
     }
 }

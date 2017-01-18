@@ -40,4 +40,12 @@ class ColorCaptionFeedViewController: ColorFeedViewController {
             callback(data)
         })
     }
+    
+    override func setupToolbar(toolbar: UIToolbar, cell: ImageCellData) {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 40, height: 40))
+        label.text = "Info"
+        label.textAlignment = .right
+        label.textColor = .white
+        toolbar.setItems([UIBarButtonItem(customView: label)], animated: false)
+    }
 }

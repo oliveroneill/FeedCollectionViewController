@@ -19,7 +19,7 @@ class SingleImageViewTests: FBSnapshotTestCase {
 
     override func setUp() {
         super.setUp()
-        // recordMode = true
+         // recordMode = true
         
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle(for: ColorCaptionFeedViewController.self))
         c = storyboard.instantiateViewController(withIdentifier: "ColorCaptionFeedViewController") as? ColorCaptionFeedViewController
