@@ -108,7 +108,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
         })
     }
     
-    public final func getPhotos() -> [CellData] {
+    public final func getCurrentCells() -> [CellData] {
         return cellData
     }
     

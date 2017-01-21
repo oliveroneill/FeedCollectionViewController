@@ -73,7 +73,7 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
     
     // MARK: IDMPhotoDataSource methods
     public func getPhotos() -> [Any]! {
-        return super.getPhotos()
+        return super.getCurrentCells()
     }
     
     public func loadMoreImages(_ browser: IDMBrowserDelegate?) {
@@ -86,7 +86,7 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
     
     // MARK: IDMPhotoBrowserDelegate methods
     public func photoBrowser(_ photoBrowser: IDMPhotoBrowser!, captionViewForPhotoAt index: UInt) -> IDMCaptionView! {
-        if let cell = super.getPhotos()[Int(index)] as? ImageCellData {
+        if let cell = super.getCurrentCells()[Int(index)] as? ImageCellData {
             if cell.caption != nil {
                 return getSingleImageView(cell: cell)
             }
@@ -95,19 +95,19 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
     }
     
     public func photoBrowser(_ photoBrowser: IDMPhotoBrowser!, imageFailed index: UInt, imageView: IDMTapDetectingImageView!) {
-        if let cell = super.getPhotos()[Int(index)] as? ImageCellData {
+        if let cell = super.getCurrentCells()[Int(index)] as? ImageCellData {
             imageFailed(cell: cell, imageView:imageView)
         }
     }
 
     public func photoBrowser(_ photoBrowser: IDMPhotoBrowser!, setupToolbar index: UInt, toolbar: UIToolbar!) {
-        if let cell = super.getPhotos()[Int(index)] as? ImageCellData {
+        if let cell = super.getCurrentCells()[Int(index)] as? ImageCellData {
             setupToolbar(toolbar: toolbar, cell: cell)
         }
     }
     
     public func photoBrowser(_ photoBrowser: IDMPhotoBrowser!, didShowPhotoAt index: UInt) {
-        if let cell = super.getPhotos()[Int(index)] as? ImageCellData {
+        if let cell = super.getCurrentCells()[Int(index)] as? ImageCellData {
             didShowPhoto(cell: cell)
         }
     }
