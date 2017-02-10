@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="h3b-4d-u15">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="h3b-4d-u15">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -111,7 +111,59 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CKZ-hh-XsE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1654" y="163"/>
+            <point key="canvasLocation" x="1817" y="133"/>
+        </scene>
+        <!--Erroring Color Feed View Controller-->
+        <scene sceneID="j6U-aj-nCi">
+            <objects>
+                <collectionViewController storyboardIdentifier="ErroringColorFeedViewController" id="Tut-9h-nyT" customClass="ErroringColorFeedViewController" customModule="FeedCollectionViewController_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Zwd-k5-xTO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mGQ-V0-p6b">
+                            <size key="itemSize" width="106" height="93"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExampleCell" id="DKZ-Ka-0Ci" customClass="ImageCollectionViewCell" customModule="FeedCollectionViewController_Example" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="106" height="93"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="106" height="93"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iuH-dK-jw8">
+                                            <rect key="frame" x="0.0" y="0.0" width="106" height="93"/>
+                                        </imageView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="iuH-dK-jw8" secondAttribute="bottom" id="2Dd-Td-EuP"/>
+                                    <constraint firstAttribute="trailing" secondItem="iuH-dK-jw8" secondAttribute="trailing" id="KfV-B7-7Lk"/>
+                                    <constraint firstAttribute="trailing" secondItem="iuH-dK-jw8" secondAttribute="trailing" id="Mkb-aY-7MZ"/>
+                                    <constraint firstItem="iuH-dK-jw8" firstAttribute="leading" secondItem="DKZ-Ka-0Ci" secondAttribute="leading" id="Wde-cB-aLi"/>
+                                    <constraint firstItem="iuH-dK-jw8" firstAttribute="leading" secondItem="DKZ-Ka-0Ci" secondAttribute="leading" id="gte-vq-HAX"/>
+                                    <constraint firstItem="iuH-dK-jw8" firstAttribute="top" secondItem="DKZ-Ka-0Ci" secondAttribute="top" id="hlq-1C-Y8V"/>
+                                    <constraint firstAttribute="bottom" secondItem="iuH-dK-jw8" secondAttribute="bottom" id="qVZ-zJ-wb2"/>
+                                    <constraint firstItem="iuH-dK-jw8" firstAttribute="top" secondItem="DKZ-Ka-0Ci" secondAttribute="top" id="u7V-Op-356"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="iuH-dK-jw8" id="BwI-uE-GJh"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Tut-9h-nyT" id="cIA-aT-GdF"/>
+                            <outlet property="delegate" destination="Tut-9h-nyT" id="fRA-2e-1wd"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jfq-sp-CLN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2709.375" y="165"/>
         </scene>
     </scenes>
 </document>

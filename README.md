@@ -101,6 +101,9 @@ To customise the photo browser's toolbar, you can override
 `setupToolbar(toolbar:UIToolbar, cell:ImageCellData)` and make modifications
 as needed.
 
+Custom error messages and views are also available for feed retrieval failure
+through `getErrorMessage` or `showErrorText`.
+
 ## Testing
 Testing is done through FBSnapshotTestCase, there are test result files included
 in `Example/Tests/ReferenceImages_64/FeedCollectionViewController_Tests.Tests`.

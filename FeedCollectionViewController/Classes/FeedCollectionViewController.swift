@@ -23,6 +23,8 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
 
     private var cellsPerRow = 2
 
+    private var errorText:UITextView?
+
     // MARK: abstract functions
 
     /**
@@ -77,6 +79,52 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
      */
     open func getCellsPerRow() -> Int {
         return cellsPerRow
+    }
+    
+    /**
+     * Return an error message to be displayed when no content is available
+     */
+    open func getErrorMessage() -> String {
+        return "No content"
+    }
+    
+    /**
+     * Use to display anything you need when no content is available.
+     * Alternatively just override `getErrorMessage` for a simple way of
+     * displaying a message
+     */
+    open func showErrorText() {
+        guard let c = self.collectionView else {
+            return
+        }
+        let textHeight:CGFloat = 50
+        errorText = UITextView(
+            frame: CGRect(
+                x: 0,
+                y: c.frame.height/2 - textHeight/2,
+                width: c.frame.width,
+                height: textHeight
+            )
+        )
+        errorText!.text = self.getErrorMessage()
+        errorText!.font = UIFont(name: "Helvetica", size: 32)
+        errorText!.textAlignment = .center
+        errorText!.textColor = .gray
+        // resize to fit text
+        errorText!.sizeToFit()
+        errorText!.frame = CGRect(x: 0, y: c.frame.height/2 - errorText!.frame.height/2, width: c.frame.width, height: errorText!.frame.height)
+        c.addSubview(errorText!)
+    }
+    
+    /**
+     * Override this when implementing `showErrorText`
+     */
+    open func hideErrorText() {
+        guard let text = errorText else {
+            return
+        }
+        text.removeFromSuperview()
+        errorText = nil
     }
     
     /**
@@ -138,6 +186,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
     }
     
     public final func refresh() {
+        hideErrorText()
         refreshControl.beginRefreshing()
         // scroll to reveal spinning wheel
         self.collectionView?.setContentOffset(
@@ -154,6 +203,9 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
                     CGPoint(x: 0, y: 0),
                     animated: true
                 )
+                if cellData.count == 0 {
+                    self.showErrorText()
+                }
             }
             // there won't be any visible images until the
             // data has been reloaded, so we wait here
