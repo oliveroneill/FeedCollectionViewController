@@ -139,11 +139,21 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
     
     public final func refresh() {
         refreshControl.beginRefreshing()
+        // scroll to reveal spinning wheel
+        self.collectionView?.setContentOffset(
+            CGPoint(x: 0, y: -self.refreshControl.frame.size.height),
+            animated: true
+        )
         getCells(start: 0, callback: { cellData in
             self.cellData = cellData
             DispatchQueue.main.sync {
                 self.collectionView?.reloadData()
                 self.refreshControl.endRefreshing()
+                // scroll to hide refresh control
+                self.collectionView?.setContentOffset(
+                    CGPoint(x: 0, y: 0),
+                    animated: true
+                )
             }
             // there won't be any visible images until the
             // data has been reloaded, so we wait here
