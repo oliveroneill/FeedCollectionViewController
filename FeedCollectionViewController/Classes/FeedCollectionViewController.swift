@@ -110,6 +110,9 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
         errorText!.font = UIFont(name: "Helvetica", size: 32)
         errorText!.textAlignment = .center
         errorText!.textColor = .gray
+        errorText!.isSelectable = false
+        errorText!.isEditable = false
+        errorText!.isScrollEnabled = false
         // resize to fit text
         errorText!.sizeToFit()
         errorText!.frame = CGRect(x: 0, y: c.frame.height/2 - errorText!.frame.height/2, width: c.frame.width, height: errorText!.frame.height)
