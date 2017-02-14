@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'FeedCollectionViewController'
-  s.version          = '0.1.9'
+  s.version          = '0.1.10'
   s.summary          = 'A wrapper around UICollectionView for Facebook/Instagram inspired feeds'
 
   s.description      = <<-DESC
