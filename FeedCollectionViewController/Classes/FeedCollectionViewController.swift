@@ -277,7 +277,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
     {
         let screenRect = UIScreen.main.bounds
         let screenWidth = screenRect.size.width
-        let cellWidth = screenWidth / CGFloat(cellsPerRow)
+        let cellWidth = screenWidth / CGFloat(getCellsPerRow())
         let size = CGSize(width: cellWidth, height: cellWidth)
         return size;
     }
