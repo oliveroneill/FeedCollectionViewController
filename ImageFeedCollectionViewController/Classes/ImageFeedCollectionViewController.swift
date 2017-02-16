@@ -19,6 +19,7 @@ import OOPhotoBrowser
  * `getImageCells` and `loadImageCell`
  */
 open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMPhotoDataSource, IDMPhotoBrowserDelegate {
+    private var browser:IDMPhotoBrowser?
     open func getImageReuseIdentifier(cell: ImageCellData) -> String {
         preconditionFailure("getImageReuseIdentifier must be overridden")
     }
@@ -33,6 +34,11 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
     
     open func getSingleImageView(cell:ImageCellData) -> SingleImageView {
         return SingleImageView(cell: cell)
+    }
+
+    // Add new views to the photo browser that will hide on tap
+    open func addToolbarViews(view: UIView) {
+        browser?.addToolbarView(view)
     }
 
     // Override this to receive alerts when an image fails to load while in
@@ -65,12 +71,12 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
     }
     
     override open func didSelectCell(index:Int, cell:CellData) {
-        let browser = IDMPhotoBrowser(dataSource: self)
+        browser = IDMPhotoBrowser(dataSource: self)
         browser?.setInitialPageIndex(UInt(index))
         browser?.delegate = self
         self.present(browser!, animated: true, completion: {})
     }
-    
+
     // MARK: IDMPhotoDataSource methods
     public func getPhotos() -> [Any]! {
         return super.getCurrentCells()
