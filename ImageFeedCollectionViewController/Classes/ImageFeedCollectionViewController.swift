@@ -37,7 +37,7 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
     }
 
     // Add new views to the photo browser that will hide on tap
-    open func addToolbarViews(view: UIView) {
+    open func addToolbarView(view: UIView) {
         browser?.addToolbarView(view)
     }
 
