@@ -311,7 +311,8 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
     override open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         showVisibleImages()
         let bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height;
-        if bottomEdge >= scrollView.contentSize.height - 20 {
+        // load more images when the user has scrolled 70% of the current feed
+        if bottomEdge >= scrollView.contentSize.height * 0.7 {
             loadMoreImages(browser: nil)
         }
     }
