@@ -265,7 +265,12 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
     }
     
     override open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let c = self.cellData[indexPath.row]
+        // add safe default in case cells are deleted
+        var row = indexPath.row
+        if row > self.cellData.count {
+            row = self.cellData.count - 1
+        }
+        let c = self.cellData[row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: getReuseIdentifier(cell: c), for: indexPath)
         loadCell(cellView: cell, cell: c)
         return cell
