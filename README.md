@@ -80,6 +80,12 @@ ImageFeedCollectionViewController:
         // load the cell (ie. a thumbnail) since it's now actually shown
     }
 ```
+
+**NOTE:** `getCells` and `getImageCells` are asynchronous calls and `callback`
+will use the main thread. Therefore `callback` must not be called on the
+`getImageCells` calling thread and should be moved onto it's own thread before
+calling `callback`.
+
 To customise views in the ImageFeedCollectionViewController, you must
 implement `SingleImageView` and override relevant methods. The relevant
 methods are the same as those in `IDMCaptionView`.

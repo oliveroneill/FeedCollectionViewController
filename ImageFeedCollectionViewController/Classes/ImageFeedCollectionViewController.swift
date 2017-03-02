@@ -24,6 +24,10 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
         preconditionFailure("getImageReuseIdentifier must be overridden")
     }
 
+    /*
+     * NOTE: `callback` uses the main thread, so `callback` must be called from
+     * a different thread. It's assumed that `getCells` is an asynchronous call.
+     */
     open func getImageCells(start:Int, callback: @escaping (([ImageCellData]) -> Void)) {
         preconditionFailure("getImageCells must be overridden")
     }
