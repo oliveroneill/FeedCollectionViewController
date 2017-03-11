@@ -143,9 +143,17 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
      */
     public final func loadMoreImages(browser:CellBrowser?) {
         getCells(start: self.cellData.count, callback: { data in
+            // keep track of last cell so that we only load new data
+            let size = self.cellData.count
             self.cellData.append(contentsOf: data)
+            // create indexes to load
+            var indexes: [IndexPath] = []
+            for i in size..<self.cellData.count {
+                indexes.append(IndexPath(row: i, section: 0))
+            }
             DispatchQueue.main.sync {
-                self.collectionView?.reloadData()
+                self.collectionView?.insertItems(at: indexes)
+                self.collectionView?.reloadItems(at: indexes)
                 browser?.imagesLoaded()
             }
             // there won't be any visible images until the
