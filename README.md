@@ -81,6 +81,9 @@ ImageFeedCollectionViewController:
     }
 ```
 
+You must have a custom `ImageCellData` implementation, this subclasses
+`IDMPhoto`, which will be used in the photo browser. To use with image
+URLs use `super.init(url: imageUrl)` within `ImageCellData`.
 **NOTE:** `getCells` and `getImageCells` are asynchronous calls and `callback`
 will use the main thread. Therefore `callback` must not be called on the
 `getImageCells` calling thread and should be moved onto it's own thread before
