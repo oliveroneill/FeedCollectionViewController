@@ -82,8 +82,13 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
     }
 
     // MARK: IDMPhotoDataSource methods
-    public func getPhotos() -> [Any]! {
-        return super.getCurrentCells()
+    public func photo(at index: UInt) -> IDMPhotoProtocol! {
+        let cells = super.getCurrentCells()
+        return cells[Int(index)] as! ImageCellData
+    }
+
+    public func numberOfPhotos() -> Int32 {
+        return Int32(super.getCurrentCells().count)
     }
     
     public func loadMoreImages(_ browser: IDMBrowserDelegate?) {
