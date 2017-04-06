@@ -143,6 +143,10 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
      */
     public final func loadMoreImages(browser:CellBrowser?) {
         getCells(start: self.cellData.count, callback: { data in
+            // if there's nothing to add then don't do anything
+            if data.count == 0 {
+                return
+            }
             // keep track of last cell so that we only load new data
             let size = self.cellData.count
             self.cellData.append(contentsOf: data)
