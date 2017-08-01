@@ -123,6 +123,9 @@ it off.
 
 ## Todo
 - Better tests. Currently I've only implemented snapshot tests
+- The snapshot tests are based on timers where something like
+[EarlGrey](https://github.com/google/EarlGrey) would be better suited but I
+had trouble with timeout errors when attempting this
 
 ## Author
 
