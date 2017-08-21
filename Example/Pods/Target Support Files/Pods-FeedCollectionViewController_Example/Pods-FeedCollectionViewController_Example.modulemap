@@ -1,0 +1,6 @@
+framework module Pods_FeedCollectionViewController_Example {
+  umbrella header "Pods-FeedCollectionViewController_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

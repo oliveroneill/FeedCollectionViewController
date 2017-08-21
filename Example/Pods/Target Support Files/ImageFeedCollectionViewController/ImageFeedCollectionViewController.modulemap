@@ -1,0 +1,6 @@
+framework module ImageFeedCollectionViewController {
+  umbrella header "ImageFeedCollectionViewController-umbrella.h"
+
+  export *
+  module * { export * }
+}
