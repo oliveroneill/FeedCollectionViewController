@@ -58,7 +58,7 @@ class ErrorMessageTests: FBSnapshotTestCase {
                 expect.fulfill()
             }
         }
-        waitForExpectations(timeout: 20) { error in
+        waitForExpectations(timeout: 10) { error in
             if let error = error {
                 XCTFail("waitForExpectationsWithTimeout errored: \(error)")
             }

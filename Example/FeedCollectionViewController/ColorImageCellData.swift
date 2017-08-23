@@ -37,11 +37,19 @@ class ColorImageCellData: ImageCellData {
     
     override func cellDidBecomeVisible() {
         // use 0.1 second delay instead of a network request
+        if loadingDelay == 0 {
+            setImage()
+            return
+        }
         DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(Int(loadingDelay*1000))) {
-            self.image = UIImage(color: self.color)
-            DispatchQueue.main.sync {
-                self.imgView?.image = self.image
-            }
+            self.setImage()
+        }
+    }
+
+    func setImage() {
+        self.image = UIImage(color: self.color)
+        DispatchQueue.main.sync {
+            self.imgView?.image = self.image
         }
     }
 

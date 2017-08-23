@@ -8,6 +8,18 @@
 
 import UIKit
 
+extension DispatchQueue {
+    // Use this method to avoid EXC_BAD_INSTRUCTION while currently on the main
+    // thread
+    class func mainSyncSafe(execute work: () -> Void) {
+        if Thread.isMainThread {
+            work()
+        } else {
+            DispatchQueue.main.sync(execute: work)
+        }
+    }
+}
+
 /**
  * Subclass this for a simple interface for an infinite scrolling feed using
  * the standard `UICollectionViewController` setup
@@ -155,7 +167,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
             for i in size..<self.cellData.count {
                 indexes.append(IndexPath(row: i, section: 0))
             }
-            DispatchQueue.main.sync {
+            DispatchQueue.mainSyncSafe {
                 self.collectionView?.insertItems(at: indexes)
                 self.collectionView?.reloadItems(at: indexes)
                 browser?.imagesLoaded()
@@ -170,7 +182,6 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
                 self.end = -1
                 self.showVisibleImages()
             })
-            
         })
     }
     
@@ -213,7 +224,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
         )
         getCells(start: 0, callback: { cellData in
             self.cellData = cellData
-            DispatchQueue.main.sync {
+            DispatchQueue.mainSyncSafe {
                 self.collectionView?.reloadData()
                 self.refreshControl.endRefreshing()
                 // scroll to hide refresh control

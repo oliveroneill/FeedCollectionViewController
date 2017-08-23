@@ -47,24 +47,32 @@ open class ColorFeedViewController: ImageFeedCollectionViewController {
     }
     
     override open func getImageCells(start: Int, callback: @escaping (([ImageCellData]) -> Void)) {
+        if loadingDelay == 0 {
+            self.loadImages(start: start, callback: callback)
+            return
+        }
         // delay for 1 second in place of an actual network request
         DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(loadingDelay)) {
-            // limit the cells to LENGTH
-            if self.collectionLength > ColorFeedViewController.LENGTH {
-                callback([])
-                return
-            }
-            var cells:[ImageCellData] = []
-            // will only return QUERY_SIZE at a time
-            for _ in 0..<ColorFeedViewController.QUERY_SIZE {
-                // increase hue slowly for each cell
-                self.hue += 1.0/Double(ColorFeedViewController.LENGTH)
-                let color = UIColor(hue: CGFloat(self.hue), saturation: 1, brightness: 1, alpha: 1)
-                cells.append(ColorImageCellData(color: color, delay: self.imageDelay))
-            }
-            callback(cells)
-            self.collectionLength += ColorFeedViewController.QUERY_SIZE
+            self.loadImages(start: start, callback: callback)
         }
+    }
+
+    func loadImages(start: Int, callback: @escaping (([ImageCellData]) -> Void)) {
+        // limit the cells to LENGTH
+        if self.collectionLength > ColorFeedViewController.LENGTH {
+            callback([])
+            return
+        }
+        var cells:[ImageCellData] = []
+        // will only return QUERY_SIZE at a time
+        for _ in 0..<ColorFeedViewController.QUERY_SIZE {
+            // increase hue slowly for each cell
+            self.hue += 1.0/Double(ColorFeedViewController.LENGTH)
+            let color = UIColor(hue: CGFloat(self.hue), saturation: 1, brightness: 1, alpha: 1)
+            cells.append(ColorImageCellData(color: color, delay: self.imageDelay))
+        }
+        callback(cells)
+        self.collectionLength += ColorFeedViewController.QUERY_SIZE
     }
     
     open func refreshContent() {
