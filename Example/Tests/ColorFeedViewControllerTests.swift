@@ -11,7 +11,7 @@ extension UIViewController {
     }
 }
 
-class Tests: FBSnapshotTestCase {
+class ColorFeedViewControllerTests: FBSnapshotTestCase {
     private var c: ColorFeedViewController?
     
     override func setUp() {

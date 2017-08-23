@@ -13,7 +13,7 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		607FACEC1AFB9204008FA782 /* ColorFeedViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* ColorFeedViewControllerTests.swift */; };
 		7D7D666C1E0A851C00410A67 /* ColorFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D666B1E0A851C00410A67 /* ColorFeedViewController.swift */; };
 		7D7D666E1E0A87A500410A67 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D666D1E0A87A500410A67 /* ImageCollectionViewCell.swift */; };
 		7D7D66701E0A8C0300410A67 /* ColorImageCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D666F1E0A8C0300410A67 /* ColorImageCellData.swift */; };
@@ -43,7 +43,7 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* FeedCollectionViewController_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedCollectionViewController_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		607FACEB1AFB9204008FA782 /* ColorFeedViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFeedViewControllerTests.swift; sourceTree = "<group>"; };
 		65B928ECD51B8444F7AB47FE /* Pods-FeedCollectionViewController_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FeedCollectionViewController_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FeedCollectionViewController_Tests/Pods-FeedCollectionViewController_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		6A058B1BE94D3D20004809A5 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		6E8213A50F2B4F558CFDCA06 /* Pods-FeedCollectionViewController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FeedCollectionViewController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FeedCollectionViewController_Example/Pods-FeedCollectionViewController_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				607FACEB1AFB9204008FA782 /* ColorFeedViewControllerTests.swift */,
 				7D7D66A41E1A207A00410A67 /* SingleImageViewTests.swift */,
 				7DFCEC5A1E4E6C0600CC4011 /* ErrorMessageTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
@@ -394,7 +394,7 @@
 			files = (
 				7DFCEC5D1E4E6D7400CC4011 /* ErrorMessageTests.swift in Sources */,
 				7D7D66A51E1A207A00410A67 /* SingleImageViewTests.swift in Sources */,
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				607FACEC1AFB9204008FA782 /* ColorFeedViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
