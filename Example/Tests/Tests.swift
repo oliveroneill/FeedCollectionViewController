@@ -25,6 +25,7 @@ class Tests: FBSnapshotTestCase {
         c?.loadingDelay = 0
         c?.imageDelay = 0
         UIApplication.shared.keyWindow!.rootViewController = c
+        ColorFeedViewController.LENGTH = 50
         
     }
     
