@@ -36,10 +36,11 @@ class SingleImageViewTests: FBSnapshotTestCase {
     
     func testCaption() {
         let expect = expectation(description: "Wait for data to load")
-        // add delay since photos are added asynchronously
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        // wait for view controller to initialise
+        DispatchQueue.main.async {
             self.c!.collectionView?.scrollToItem(at: IndexPath(item:19, section: 0), at: .top, animated: true)
             self.c?.collectionView((self.c?.collectionView)!, didSelectItemAt: IndexPath(item: 10, section: 0))
+            // wait for selected item to appear
             DispatchQueue.main.async {
                 if let topController = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController {
                     self.FBSnapshotVerifyView(topController.view!)

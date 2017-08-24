@@ -171,17 +171,11 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
                 self.collectionView?.insertItems(at: indexes)
                 self.collectionView?.reloadItems(at: indexes)
                 browser?.imagesLoaded()
-            }
-            // there won't be any visible images until the
-            // data has been reloaded, so we wait here
-            // TODO: figure out how to know when data is
-            // populated
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100), execute: {
                 // reset counters here so that data is completely refreshed
                 self.start = -1
                 self.end = -1
                 self.showVisibleImages()
-            })
+            }
         })
     }
     
@@ -235,17 +229,11 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
                 if cellData.count == 0 {
                     self.showErrorText()
                 }
-            }
-            // there won't be any visible images until the
-            // data has been reloaded, so we wait here
-            // TODO: figure out how to know when data is
-            // populated
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100), execute: {
                 // reset counters here so that data is completely refreshed
                 self.start = -1
                 self.end = -1
                 self.showVisibleImages()
-            })
+            }
         })
     }
 
@@ -270,9 +258,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
     private final func newCellVisible(at:Int) {
         if at < self.cellData.count {
             // set cell with image
-            DispatchQueue.global(qos: .background).async {
-                self.cellData[at].cellDidBecomeVisible()
-            }
+            self.cellData[at].cellDidBecomeVisible()
         }
     }
     

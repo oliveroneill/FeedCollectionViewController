@@ -42,15 +42,15 @@ class ColorImageCellData: ImageCellData {
             return
         }
         DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(Int(loadingDelay*1000))) {
-            self.setImage()
+            DispatchQueue.main.sync {
+                self.setImage()
+            }
         }
     }
 
     func setImage() {
         self.image = UIImage(color: self.color)
-        DispatchQueue.main.sync {
-            self.imgView?.image = self.image
-        }
+        self.imgView?.image = self.image
     }
 
     func setImageView(imageView:UIImageView) {

@@ -47,11 +47,11 @@ class ErrorMessageTests: FBSnapshotTestCase {
         c?.refreshFeed()
         let expect = expectation(description: "Wait for refresh to finish")
         // must wait for previous refresh to finish before reloading again
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.async {
             ColorFeedViewController.LENGTH = 50
             self.c?.refreshFeed()
             // wait for images to load
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.async {
                 let view = self.c!.view
                 self.FBSnapshotVerifyView(view!)
                 self.FBSnapshotVerifyLayer(view!.layer)
@@ -67,8 +67,8 @@ class ErrorMessageTests: FBSnapshotTestCase {
     
     func testDisplay() {
         let expect = expectation(description: "Wait for data to load")
-        // add delay since photos are added asynchronously
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        // wait for main thread to display current content
+        DispatchQueue.main.async {
             let view = self.c!.view
             self.FBSnapshotVerifyView(view!)
             self.FBSnapshotVerifyLayer(view!.layer)
