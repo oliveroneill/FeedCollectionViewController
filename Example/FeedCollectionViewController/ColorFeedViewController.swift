@@ -27,7 +27,7 @@ extension UIColor {
 open class ColorFeedViewController: ImageFeedCollectionViewController {
 
     static let QUERY_SIZE = 20
-    static var LENGTH = 50
+    static var length = 50
     var loadingDelay = 1
     var imageDelay = 0.1
 
@@ -59,7 +59,7 @@ open class ColorFeedViewController: ImageFeedCollectionViewController {
 
     func loadImages(start: Int, callback: @escaping (([ImageCellData]) -> Void)) {
         // limit the cells to LENGTH
-        if self.collectionLength > ColorFeedViewController.LENGTH {
+        if self.collectionLength > ColorFeedViewController.length {
             callback([])
             return
         }
@@ -67,7 +67,7 @@ open class ColorFeedViewController: ImageFeedCollectionViewController {
         // will only return QUERY_SIZE at a time
         for _ in 0..<ColorFeedViewController.QUERY_SIZE {
             // increase hue slowly for each cell
-            self.hue += 1.0/Double(ColorFeedViewController.LENGTH)
+            self.hue += 1.0/Double(ColorFeedViewController.length)
             let color = UIColor(hue: CGFloat(self.hue), saturation: 1, brightness: 1, alpha: 1)
             cells.append(ColorImageCellData(color: color, delay: self.imageDelay))
         }

@@ -31,24 +31,24 @@ class ErrorMessageTests: FBSnapshotTestCase {
     }
     
     func testErrorMessages() {
-        ColorFeedViewController.LENGTH = -1
+        ColorFeedViewController.length = -1
         testDisplay()
     }
     
     func testCustomErrorMessage() {
-        ColorFeedViewController.LENGTH = -1
+        ColorFeedViewController.length = -1
         c?.errorMessage = "Something went wrong. Please try again later."
         c?.refreshFeed()
         testDisplay()
     }
     
     func testHidingMessage() {
-        ColorFeedViewController.LENGTH = -1
+        ColorFeedViewController.length = -1
         c?.refreshFeed()
         let expect = expectation(description: "Wait for refresh to finish")
         // must wait for previous refresh to finish before reloading again
         DispatchQueue.main.async {
-            ColorFeedViewController.LENGTH = 50
+            ColorFeedViewController.length = 50
             self.c?.refreshFeed()
             // wait for images to load
             DispatchQueue.main.async {

@@ -27,7 +27,7 @@ class SingleImageViewTests: FBSnapshotTestCase {
         c?.loadingDelay = 0
         c?.imageDelay = 0
         UIApplication.shared.keyWindow!.rootViewController = c
-        ColorFeedViewController.LENGTH = 50
+        ColorFeedViewController.length = 50
     }
     
     override func tearDown() {

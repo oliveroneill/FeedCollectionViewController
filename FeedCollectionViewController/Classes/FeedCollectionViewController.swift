@@ -130,7 +130,12 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
         errorText!.isScrollEnabled = false
         // resize to fit text
         errorText!.sizeToFit()
-        errorText!.frame = CGRect(x: 0, y: c.frame.height/2 - errorText!.frame.height/2, width: c.frame.width, height: errorText!.frame.height)
+        errorText!.frame = CGRect(
+            x: 0,
+            y: c.frame.height/2 - errorText!.frame.height/2,
+            width: c.frame.width,
+            height: errorText!.frame.height
+        )
         c.addSubview(errorText!)
     }
     
@@ -188,7 +193,11 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
     override open func viewDidLoad() {
         super.viewDidLoad()
         // add UIRefreshControl for scroll down to refresh
-        refreshControl.addTarget(self, action: #selector(FeedCollectionViewController.refresh), for: .valueChanged)
+        refreshControl.addTarget(
+            self,
+            action: #selector(FeedCollectionViewController.refresh),
+            for: .valueChanged
+        )
         self.collectionView!.addSubview(refreshControl)
         
         self.collectionView?.alwaysBounceVertical = true
@@ -319,10 +328,10 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
         return CGSize(width: 0, height: 0)
     }
     
-    //MARK: scrollView methods
+    //MARK: UIScrollView methods
     override open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         showVisibleImages()
-        let bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height;
+        let bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height
         // load more images when the user has scrolled 70% of the current feed
         if bottomEdge >= scrollView.contentSize.height * 0.7 {
             loadMoreImages(browser: nil)

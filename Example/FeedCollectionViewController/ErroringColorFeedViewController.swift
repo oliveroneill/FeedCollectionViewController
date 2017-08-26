@@ -15,7 +15,7 @@ class ErroringColorFeedViewController: ColorFeedViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ColorFeedViewController.LENGTH = -1
+        ColorFeedViewController.length = -1
         // Do any additional setup after loading the view.
     }
 
