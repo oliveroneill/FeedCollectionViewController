@@ -1,6 +1,0 @@
-framework module Pods_FeedCollectionViewController_Tests {
-  umbrella header "Pods-FeedCollectionViewController_Tests-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -1,6 +1,0 @@
-framework module FeedCollectionViewController {
-  umbrella header "FeedCollectionViewController-umbrella.h"
-
-  export *
-  module * { export * }
-}

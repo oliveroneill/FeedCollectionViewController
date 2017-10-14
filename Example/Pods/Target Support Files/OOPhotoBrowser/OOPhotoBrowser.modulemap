@@ -1,6 +1,0 @@
-framework module OOPhotoBrowser {
-  umbrella header "OOPhotoBrowser-umbrella.h"
-
-  export *
-  module * { export * }
-}
