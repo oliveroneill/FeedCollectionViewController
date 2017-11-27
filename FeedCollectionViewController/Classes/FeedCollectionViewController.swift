@@ -217,7 +217,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
         // Dispose of any resources that can be recreated.
     }
     
-    public final func refresh() {
+    @objc public final func refresh() {
         hideErrorText()
         refreshControl.beginRefreshing()
         // scroll to reveal spinning wheel
