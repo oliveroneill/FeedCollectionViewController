@@ -41,7 +41,7 @@ class SingleImageViewTests: FBSnapshotTestCase {
             self.c!.collectionView?.scrollToItem(at: IndexPath(item:19, section: 0), at: .top, animated: true)
             self.c?.collectionView((self.c?.collectionView)!, didSelectItemAt: IndexPath(item: 10, section: 0))
             // wait for selected item to appear
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if let topController = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController {
                     self.FBSnapshotVerifyView(topController.view!)
                     self.FBSnapshotVerifyLayer(topController.view!.layer)

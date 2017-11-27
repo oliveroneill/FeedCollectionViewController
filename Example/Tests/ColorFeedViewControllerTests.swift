@@ -48,7 +48,7 @@ class ColorFeedViewControllerTests: FBSnapshotTestCase {
     func testInitialScreen() {
         let expect = expectation(description: "Wait for data to load")
         // wait until the main thread is done displaying content
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             let view = self.c!.view
             self.FBSnapshotVerifyView(view!)
             self.FBSnapshotVerifyLayer(view!.layer)
@@ -69,7 +69,7 @@ class ColorFeedViewControllerTests: FBSnapshotTestCase {
         // wait until the main thread is done displaying content
         DispatchQueue.main.async {
             self.c!.refreshContent()
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 let view = self.c!.view
                 self.FBSnapshotVerifyView(view!)
                 self.FBSnapshotVerifyLayer(view!.layer)
@@ -110,7 +110,7 @@ class ColorFeedViewControllerTests: FBSnapshotTestCase {
     func testScrollToNewScreen() {
         let expect = expectation(description: "Wait for data to load")
         // wait until the main thread is done displaying content
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.scrollTo(index: 19, callback: {
                 self.scrollTo(index: 35, callback: {
                     let view = self.c!.view
