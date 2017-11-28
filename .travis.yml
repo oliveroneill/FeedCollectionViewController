@@ -15,7 +15,7 @@ env:
 
 before_install:
 - gem install cocoapods # Since Travis is not always on latest version
-- pip install tinys3
+- pip install --user tinys3
 - pod repo update
 - pod install --project-directory=Example
 script:
