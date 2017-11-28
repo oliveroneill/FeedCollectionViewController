@@ -112,8 +112,9 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
         guard let c = self.collectionView else {
             return
         }
+        hideErrorText()
         let textHeight:CGFloat = 50
-        errorText = UITextView(
+        let errorText = UITextView(
             frame: CGRect(
                 x: 0,
                 y: c.frame.height/2 - textHeight/2,
@@ -121,22 +122,23 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
                 height: textHeight
             )
         )
-        errorText!.text = self.getErrorMessage()
-        errorText!.font = UIFont(name: "Helvetica", size: 32)
-        errorText!.textAlignment = .center
-        errorText!.textColor = .gray
-        errorText!.isSelectable = false
-        errorText!.isEditable = false
-        errorText!.isScrollEnabled = false
+        errorText.text = self.getErrorMessage()
+        errorText.font = UIFont(name: "Helvetica", size: 32)
+        errorText.textAlignment = .center
+        errorText.textColor = .gray
+        errorText.isSelectable = false
+        errorText.isEditable = false
+        errorText.isScrollEnabled = false
         // resize to fit text
-        errorText!.sizeToFit()
-        errorText!.frame = CGRect(
+        errorText.sizeToFit()
+        errorText.frame = CGRect(
             x: 0,
-            y: c.frame.height/2 - errorText!.frame.height/2,
+            y: c.frame.height/2 - errorText.frame.height/2,
             width: c.frame.width,
-            height: errorText!.frame.height
+            height: errorText.frame.height
         )
-        c.addSubview(errorText!)
+        self.errorText = errorText
+        c.addSubview(errorText)
     }
     
     /**
@@ -198,8 +200,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
             action: #selector(FeedCollectionViewController.refresh),
             for: .valueChanged
         )
-        self.collectionView!.addSubview(refreshControl)
-        
+        self.collectionView?.addSubview(refreshControl)
         self.collectionView?.alwaysBounceVertical = true
     }
     

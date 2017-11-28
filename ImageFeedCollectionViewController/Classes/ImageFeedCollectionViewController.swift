@@ -75,16 +75,19 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
     }
     
     override open func didSelectCell(index:Int, cell:CellData) {
-        browser = IDMPhotoBrowser(dataSource: self)
-        browser?.setInitialPageIndex(UInt(index))
-        browser?.delegate = self
-        self.present(browser!, animated: true, completion: {})
+        guard let browser = IDMPhotoBrowser(dataSource: self) else {
+            return
+        }
+        browser.setInitialPageIndex(UInt(index))
+        browser.delegate = self
+        self.browser = browser
+        self.present(browser, animated: true, completion: {})
     }
 
     // MARK: IDMPhotoDataSource methods
-    public func photo(at index: UInt) -> IDMPhotoProtocol! {
+    public func photo(at index: UInt) -> IDMPhotoProtocol? {
         let cells = super.getCurrentCells()
-        return cells[Int(index)] as! ImageCellData
+        return cells[Int(index)] as? ImageCellData
     }
 
     public func numberOfPhotos() -> Int32 {
@@ -100,7 +103,7 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
     }
     
     // MARK: IDMPhotoBrowserDelegate methods
-    public func photoBrowser(_ photoBrowser: IDMPhotoBrowser!, captionViewForPhotoAt index: UInt) -> IDMCaptionView! {
+    public func photoBrowser(_ photoBrowser: IDMPhotoBrowser, captionViewForPhotoAt index: UInt) -> IDMCaptionView? {
         if let cell = super.getCurrentCells()[Int(index)] as? ImageCellData {
             if cell.caption != nil {
                 return getSingleImageView(cell: cell)
@@ -109,19 +112,19 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
         return nil
     }
     
-    public func photoBrowser(_ photoBrowser: IDMPhotoBrowser!, imageFailed index: UInt, imageView: IDMTapDetectingImageView!) {
+    public func photoBrowser(_ photoBrowser: IDMPhotoBrowser, imageFailed index: UInt, imageView: IDMTapDetectingImageView) {
         if let cell = super.getCurrentCells()[Int(index)] as? ImageCellData {
             imageFailed(cell: cell, imageView:imageView)
         }
     }
 
-    public func photoBrowser(_ photoBrowser: IDMPhotoBrowser!, setupToolbar index: UInt, toolbar: UIToolbar!) {
+    public func photoBrowser(_ photoBrowser: IDMPhotoBrowser, setupToolbar index: UInt, toolbar: UIToolbar) {
         if let cell = super.getCurrentCells()[Int(index)] as? ImageCellData {
             setupToolbar(toolbar: toolbar, cell: cell)
         }
     }
     
-    public func photoBrowser(_ photoBrowser: IDMPhotoBrowser!, didShowPhotoAt index: UInt) {
+    public func photoBrowser(_ photoBrowser: IDMPhotoBrowser, didShowPhotoAt index: UInt) {
         if let cell = super.getCurrentCells()[Int(index)] as? ImageCellData {
             didShowPhoto(cell: cell)
         }
