@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'ImageFeedCollectionViewController'
-  s.version          = '1.0.4'
+  s.version          = '1.0.5'
   s.summary          = 'An extension on FeedCollectionViewController that is used for image feeds'
 
   s.description      = <<-DESC
