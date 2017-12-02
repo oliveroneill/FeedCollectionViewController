@@ -329,6 +329,11 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
         return CGSize(width: 0, height: 0)
     }
     
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        collectionViewLayout.invalidateLayout()
+    }
+
     //MARK: UIScrollView methods
     override open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         showVisibleImages()
