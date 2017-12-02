@@ -6,8 +6,6 @@
 //  Copyright © 2016 Oliver ONeill. All rights reserved.
 //
 
-import UIKit
-
 /**
  * The data corresponding to an individual cell in a
  * `FeedCollectionViewController`

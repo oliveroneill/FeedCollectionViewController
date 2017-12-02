@@ -6,7 +6,6 @@
 //
 //
 
-import UIKit
 import OOPhotoBrowser
 import FeedCollectionViewController
 

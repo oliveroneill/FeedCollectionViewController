@@ -6,8 +6,6 @@
 //  Copyright © 2016 Oliver ONeill. All rights reserved.
 //
 
-import UIKit
-
 /**
  * `FeedCollectionViewController.loadMoreImages` takes an optional argument of
  * a CellBrowser. This allows the user to call `loadMoreImages` and be notified
