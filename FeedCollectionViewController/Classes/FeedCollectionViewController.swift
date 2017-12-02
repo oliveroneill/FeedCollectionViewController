@@ -37,7 +37,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
 
     private var errorText:UITextView?
 
-    // MARK: abstract functions
+// MARK: abstract functions
 
     /**
      * Return the reuse identifier for the cell, used to determine how to load
@@ -77,9 +77,9 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
     open func loadCell(cellView: UICollectionViewCell, cell:CellData) {
         preconditionFailure("loadCell must be overridden")
     }
-    
-    // MARK: useful functions
-    
+
+// MARK: useful functions
+
     /**
      * Called when a cell is tapped on. Consider implementing `CellBrowser` if
      * you plan on loading more images from a separate view
@@ -189,9 +189,10 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
     public final func getCurrentCells() -> [CellData] {
         return cellData
     }
-    
-    // MARK: internal functions
-    
+}
+
+// MARK: internal functions
+extension FeedCollectionViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         // add UIRefreshControl for scroll down to refresh
@@ -271,9 +272,10 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
             self.cellData[at].cellDidBecomeVisible()
         }
     }
+}
     
-    // MARK: UICollectionViewDataSource
-
+// MARK: UICollectionViewDataSource
+extension FeedCollectionViewController {
     override open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         didSelectCell(index: indexPath.row, cell: cellData[indexPath.row])
     }
@@ -297,9 +299,10 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
         loadCell(cellView: cell, cell: c)
         return cell
     }
-    
-    // MARK: UICollectionViewDelegateFlowLayout
-    
+}
+
+// MARK: UICollectionViewDelegateFlowLayout
+extension FeedCollectionViewController {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         let screenRect = UIScreen.main.bounds
@@ -333,8 +336,10 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
         super.viewWillTransition(to: size, with: coordinator)
         collectionViewLayout.invalidateLayout()
     }
+}
 
-    //MARK: UIScrollView methods
+//MARK: UIScrollView methods
+extension FeedCollectionViewController {
     override open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         showVisibleImages()
         let bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height

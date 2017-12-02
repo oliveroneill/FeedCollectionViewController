@@ -83,8 +83,10 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
         self.browser = browser
         self.present(browser, animated: true, completion: {})
     }
+}
 
-    // MARK: IDMPhotoDataSource methods
+// MARK: IDMPhotoDataSource methods
+extension ImageFeedCollectionViewController {
     public func photo(at index: UInt) -> IDMPhotoProtocol? {
         let cells = super.getCurrentCells()
         return cells[Int(index)] as? ImageCellData
@@ -101,8 +103,10 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, IDMP
         }
         super.loadMoreImages(browser: cellBrowser)
     }
-    
-    // MARK: IDMPhotoBrowserDelegate methods
+}
+
+// MARK: IDMPhotoBrowserDelegate methods
+extension ImageFeedCollectionViewController {
     public func photoBrowser(_ photoBrowser: IDMPhotoBrowser, captionViewForPhotoAt index: UInt) -> IDMCaptionView? {
         if let cell = super.getCurrentCells()[Int(index)] as? ImageCellData {
             if cell.caption != nil {
