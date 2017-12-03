@@ -1,6 +1,7 @@
 use_frameworks!
 
 target 'FeedCollectionViewController_Example' do
+  platform :ios, '8.3'
   pod 'FeedCollectionViewController', :path => '../'
   pod 'ImageFeedCollectionViewController', :path => '../'
 
