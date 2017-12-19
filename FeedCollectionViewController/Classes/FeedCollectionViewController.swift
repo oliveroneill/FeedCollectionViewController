@@ -56,9 +56,6 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
      * CollectionView. The number of cells returned does not need to be large,
      * however the amount is left up to the implementer
      *
-     * NOTE: `callback` uses the main thread, so `callback` must be called from
-     * a different thread. It's assumed that `getCells` is an asynchronous call.
-     *
      * @param start - the starting point of where data should be retrieved from
      * in the list
      * @param callback - return the corresponding cells through this callback
