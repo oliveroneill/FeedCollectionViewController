@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension DispatchQueue {
+private extension DispatchQueue {
     // Use this method to avoid EXC_BAD_INSTRUCTION while currently on the main
     // thread
     class func mainSyncSafe(execute work: () -> Void) {
@@ -110,30 +110,8 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
             return
         }
         hideErrorText()
-        let textHeight:CGFloat = 50
-        let errorText = UITextView(
-            frame: CGRect(
-                x: 0,
-                y: c.frame.height/2 - textHeight/2,
-                width: c.frame.width,
-                height: textHeight
-            )
-        )
+        let errorText = ErrorView(centerTextWithin: c)
         errorText.text = self.getErrorMessage()
-        errorText.font = UIFont(name: "Helvetica", size: 32)
-        errorText.textAlignment = .center
-        errorText.textColor = .gray
-        errorText.isSelectable = false
-        errorText.isEditable = false
-        errorText.isScrollEnabled = false
-        // resize to fit text
-        errorText.sizeToFit()
-        errorText.frame = CGRect(
-            x: 0,
-            y: c.frame.height/2 - errorText.frame.height/2,
-            width: c.frame.width,
-            height: errorText.frame.height
-        )
         self.errorText = errorText
         c.addSubview(errorText)
     }
