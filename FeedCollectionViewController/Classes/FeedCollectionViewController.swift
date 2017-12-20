@@ -37,7 +37,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
 
     private var errorText:UITextView?
 
-// MARK: abstract functions
+    // MARK: abstract functions
 
     /**
      * Return the reuse identifier for the cell, used to determine how to load
@@ -75,7 +75,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
         preconditionFailure("loadCell must be overridden")
     }
 
-// MARK: useful functions
+    // MARK: useful functions
 
     /**
      * Called when a cell is tapped on. Consider implementing `CellBrowser` if
@@ -92,14 +92,14 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
     open func getCellsPerRow() -> Int {
         return cellsPerRow
     }
-    
+
     /**
      * Return an error message to be displayed when no content is available
      */
     open func getErrorMessage() -> String {
         return "No content"
     }
-    
+
     /**
      * Use to display anything you need when no content is available.
      * Alternatively just override `getErrorMessage` for a simple way of
@@ -115,7 +115,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
         self.errorText = errorText
         c.addSubview(errorText)
     }
-    
+
     /**
      * Override this when implementing `showErrorText`
      */
@@ -126,7 +126,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
         text.removeFromSuperview()
         errorText = nil
     }
-    
+
     /**
      * Call this to load new images. Optionally specify a `CellBrowser` if you
      * wish to be notified via `CellBrowser.imagesLoaded()` when new images have
@@ -160,7 +160,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
             }
         })
     }
-    
+
     public final func getCurrentCells() -> [CellData] {
         return cellData
     }
@@ -179,21 +179,11 @@ extension FeedCollectionViewController {
         self.collectionView?.addSubview(refreshControl)
         self.collectionView?.alwaysBounceVertical = true
     }
-    
+
     override open func viewDidAppear(_ animated: Bool) {
-        // scroll down, so that the spinning wheel can be seen on first refresh
-        self.collectionView?.setContentOffset(
-            CGPoint(x: 0, y: -self.refreshControl.frame.size.height),
-            animated: true
-        )
         refresh()
     }
-    
-    override open func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
     @objc public final func refresh() {
         hideErrorText()
         refreshControl.beginRefreshing()
@@ -231,7 +221,8 @@ extension FeedCollectionViewController {
         guard let startPath = visibles.first, let endPath = visibles.last else {
             return
         }
-        if (startPath.row == start) && (endPath.row == end) && (endPath.row < self.cellData.count - 4) {
+        let alreadyUpdated = (startPath.row == start) && (endPath.row == end)
+        if alreadyUpdated {
             return
         }
         start = startPath.row
@@ -240,7 +231,7 @@ extension FeedCollectionViewController {
             self.newCellVisible(at: indexPath.row)
         }
     }
-    
+
     private final func newCellVisible(at:Int) {
         if at < self.cellData.count {
             // set cell with image
