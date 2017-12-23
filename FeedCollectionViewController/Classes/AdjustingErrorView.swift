@@ -14,7 +14,7 @@ private let textHeight: CGFloat = 50
  * This will center the text within a specified container and handle multiple
  * line error messages as well as the formatting
  */
-class ErrorView: UITextView {
+class AdjustingErrorView: UITextView {
     var containerToCenterText:UIView? {
         didSet {
             adjustSize()
