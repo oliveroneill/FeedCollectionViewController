@@ -106,14 +106,14 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
      * displaying a message
      */
     open func showErrorText() {
-        guard let c = self.collectionView else {
+        guard let c = collectionView else {
             return
         }
         hideErrorText()
-        let errorText = ErrorView(centerTextWithin: c)
-        errorText.text = self.getErrorMessage()
-        self.errorText = errorText
-        c.addSubview(errorText)
+        let errorDisplay = AdjustingErrorView(centerTextWithin: c)
+        errorDisplay.text = getErrorMessage()
+        errorText = errorDisplay
+        c.addSubview(errorDisplay)
     }
 
     /**
@@ -136,7 +136,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
      * loaded images
      */
     public final func loadMoreImages(browser:CellBrowser?) {
-        getCells(start: self.cellData.count, callback: { data in
+        getCells(start: cellData.count, callback: { data in
             // if there's nothing to add then don't do anything
             if data.count == 0 {
                 return
@@ -170,26 +170,38 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
 extension FeedCollectionViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
+        // set feed layout
+        initialiseCollectionViewLayout()
         // add UIRefreshControl for scroll down to refresh
         refreshControl.addTarget(
             self,
             action: #selector(FeedCollectionViewController.refresh),
             for: .valueChanged
         )
-        self.collectionView?.addSubview(refreshControl)
-        self.collectionView?.alwaysBounceVertical = true
+        collectionView?.addSubview(refreshControl)
+        collectionView?.alwaysBounceVertical = true
     }
 
     override open func viewDidAppear(_ animated: Bool) {
         refresh()
     }
 
+    private final func initialiseCollectionViewLayout() {
+        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.minimumLineSpacing = 0
+            layout.minimumInteritemSpacing = 0
+            layout.footerReferenceSize = .zero
+            layout.headerReferenceSize = .zero
+            layout.sectionInset = .zero
+        }
+    }
+
     @objc public final func refresh() {
         hideErrorText()
         refreshControl.beginRefreshing()
         // scroll to reveal spinning wheel
-        self.collectionView?.setContentOffset(
-            CGPoint(x: 0, y: -self.refreshControl.frame.size.height),
+        collectionView?.setContentOffset(
+            CGPoint(x: 0, y: -refreshControl.frame.size.height),
             animated: true
         )
         getCells(start: 0, callback: { cellData in
@@ -214,8 +226,8 @@ extension FeedCollectionViewController {
     }
 
     private final func showVisibleImages() {
-        self.collectionView?.layoutIfNeeded()
-        guard let visibles = self.collectionView?.indexPathsForVisibleItems else {
+        collectionView?.layoutIfNeeded()
+        guard let visibles = collectionView?.indexPathsForVisibleItems else {
             return
         }
         guard let startPath = visibles.first, let endPath = visibles.last else {
@@ -228,28 +240,24 @@ extension FeedCollectionViewController {
         start = startPath.row
         end = endPath.row
         for indexPath in visibles {
-            self.newCellVisible(at: indexPath.row)
+            newCellVisible(at: indexPath.row)
         }
     }
 
     private final func newCellVisible(at:Int) {
-        if at < self.cellData.count {
+        if at < cellData.count {
             // set cell with image
-            self.cellData[at].cellDidBecomeVisible()
+            cellData[at].cellDidBecomeVisible()
         }
     }
 }
-    
+
 // MARK: UICollectionViewDataSource
 extension FeedCollectionViewController {
     override open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         didSelectCell(index: indexPath.row, cell: cellData[indexPath.row])
     }
-    
-    override open func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
+
     override open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cellData.count
     }
@@ -257,10 +265,10 @@ extension FeedCollectionViewController {
     override open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // add safe default in case cells are deleted
         var row = indexPath.row
-        if row > self.cellData.count {
-            row = self.cellData.count - 1
+        if row > cellData.count {
+            row = cellData.count - 1
         }
-        let c = self.cellData[row]
+        let c = cellData[row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: getReuseIdentifier(cell: c), for: indexPath)
         loadCell(cellView: cell, cell: c)
         return cell
@@ -276,26 +284,6 @@ extension FeedCollectionViewController {
         let cellWidth = screenWidth / CGFloat(getCellsPerRow())
         let size = CGSize(width: cellWidth, height: cellWidth)
         return size;
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .zero
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return .zero
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .zero
     }
     
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
