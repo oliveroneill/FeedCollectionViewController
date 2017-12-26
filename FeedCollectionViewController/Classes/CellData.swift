@@ -15,5 +15,5 @@ public protocol CellData {
      * This function is called when a new cell is visible. This should be used
      * to initialise the cells viewing components
      */
-    func cellDidBecomeVisible();
+    func cellDidBecomeVisible()
 }

@@ -11,9 +11,12 @@ import ImageFeedCollectionViewController
 
 class ExampleSingleImageView: SingleImageView {
     override func setupCaption() {
-        let label = UILabel(frame: CGRect(x: 10, y: 0,
-                                          width: self.bounds.size.width-20,
-                                          height: self.bounds.size.height))
+        let label = UILabel(
+            frame: CGRect(
+                x: 10, y: 0, width: self.bounds.size.width-20,
+                height: self.bounds.size.height
+            )
+        )
         label.textColor = .white
         label.text = cell.caption
         self.addSubview(label)
@@ -27,11 +30,16 @@ class ExampleSingleImageView: SingleImageView {
     }
 }
 
-class ColorCaptionFeedViewController: ColorFeedViewController {
-    override func getSingleImageView(cell: ImageCellData) -> SingleImageView {
+class ColorCaptionFeedViewController: ColorFeedViewController, PhotoBrowserDelegate {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        browserDelegate = self
+    }
+
+    public override func getSingleImageView(cell: ImageCellData) -> SingleImageView {
         return ExampleSingleImageView(cell: cell)
     }
-    
+
     override func getImageCells(start: Int, callback: @escaping (([ImageCellData]) -> Void)) {
         super.getImageCells(start: start, callback: { data in
             for cell in data {
@@ -41,11 +49,19 @@ class ColorCaptionFeedViewController: ColorFeedViewController {
         })
     }
     
-    override func setupToolbar(toolbar: UIToolbar, cell: ImageCellData) {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 40, height: 40))
+    public func setupToolbar(toolbar: UIToolbar, cell: ImageCellData) {
+        let label = UILabel(
+            frame: CGRect(
+                x: 0, y: 0,
+                width: UIScreen.main.bounds.width - 40, height: 40
+            )
+        )
         label.text = "Info"
         label.textAlignment = .right
         label.textColor = .white
         toolbar.setItems([UIBarButtonItem(customView: label)], animated: false)
     }
+
+    func didShowPhoto(cell: ImageCellData) {}
+    func imageDidFail(cell: ImageCellData, imageView: UIImageView) {}
 }

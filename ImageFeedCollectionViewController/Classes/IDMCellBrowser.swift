@@ -9,7 +9,7 @@
 import FeedCollectionViewController
 import OOPhotoBrowser
 
-class IDMCellBrowser: CellBrowser {
+class IDMCellBrowser: ImageLoadDelegate {
     private var browser: IDMBrowserDelegate
 
     init(browser: IDMBrowserDelegate) {

@@ -7,30 +7,25 @@
 //
 
 import UIKit
+import FeedCollectionViewController
 import ImageFeedCollectionViewController
 
+// Default error message. Used in testing
+var errorMessage: String = "Something went wrong"
 class ErroringColorFeedViewController: ColorFeedViewController {
+    class CustomErrorDataSource: ErrorDataSource {
+        func getErrorMessage() -> String {
+            return errorMessage
+        }
+    }
+    private let errorSource = CustomErrorDataSource()
 
-    var errorMessage:String? = "Something went wrong"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        errorDataSource = errorSource
         ColorFeedViewController.length = -1
-        // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func getErrorMessage() -> String {
-        if let message = errorMessage {
-            return message
-        }
-        return super.getErrorMessage()
-    }
-    
     func refreshFeed() {
         refresh()
     }

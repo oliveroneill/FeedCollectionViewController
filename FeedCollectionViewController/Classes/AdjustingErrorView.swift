@@ -1,5 +1,5 @@
 //
-//  ErrorView.swift
+//  AdjustingErrorView.swift
 //  DACircularProgress
 //
 //  Created by Oliver ONeill on 20/12/17.
@@ -23,20 +23,24 @@ class AdjustingErrorView: UITextView {
 
     override var text: String! {
         didSet {
-            self.adjustSize()
+            adjustSize()
         }
     }
 
-    convenience init(centerTextWithin containerToCenterText:UIView) {
+    /**
+     * Create a text view that will center the text within the container view
+     */
+    convenience init(centerTextWithin container:UIView) {
         // set frame to center within view
-        self.init(frame: CGRect(
+        self.init(
+            frame: CGRect(
                 x: 0,
-                y: containerToCenterText.frame.height/2 - textHeight/2,
-                width: containerToCenterText.frame.width,
+                y: container.frame.height/2 - textHeight/2,
+                width: container.frame.width,
                 height: textHeight
             ), textContainer: nil
         )
-        self.containerToCenterText = containerToCenterText
+        self.containerToCenterText = container
     }
 
     override init(frame: CGRect, textContainer: NSTextContainer?) {

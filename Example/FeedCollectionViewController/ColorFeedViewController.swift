@@ -24,7 +24,7 @@ extension UIColor {
     }
 }
 
-open class ColorFeedViewController: ImageFeedCollectionViewController {
+open class ColorFeedViewController: ImageFeedCollectionViewController, ImageFeedPresenter, ImageFeedDataSource {
 
     static let QUERY_SIZE = 20
     static var length = 50
@@ -33,20 +33,26 @@ open class ColorFeedViewController: ImageFeedCollectionViewController {
 
     var collectionLength = 0
     var hue = 0.0
-    
+
     override open func viewDidLoad() {
         super.viewDidLoad()
+        imageFeedSource = self
+        imageFeedPresenter = self
     }
 
-    override open func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    override open func getImageReuseIdentifier(cell: ImageCellData) -> String {
+    public func getImageReuseIdentifier(cell: ImageCellData) -> String {
         return "ExampleCell"
     }
-    
-    override open func getImageCells(start: Int, callback: @escaping (([ImageCellData]) -> Void)) {
+
+    public func getSingleImageView(cell: ImageCellData) -> SingleImageView {
+        // This is a slight quirk in Swift, in order for
+        // `ColorCaptionFeedCollectionViewController` to override the default
+        // implementation of `getSingleImageView`, we need to call it here first
+        // See: https://team.goodeggs.com/overriding-swift-protocol-extension-default-implementations-d005a4428bda
+        return self.getSingleImageView(cell: cell)
+    }
+
+    public func getImageCells(start: Int, callback: @escaping (([ImageCellData]) -> Void)) {
         if loadingDelay == 0 {
             self.loadImages(start: start, callback: callback)
             return
@@ -74,18 +80,17 @@ open class ColorFeedViewController: ImageFeedCollectionViewController {
         callback(cells)
         self.collectionLength += ColorFeedViewController.QUERY_SIZE
     }
-    
+
     open func refreshContent() {
         self.refresh()
     }
-    
-    override open func loadImageCell(cellView: UICollectionViewCell, cell: ImageCellData) {
+
+    public func loadImageCell(cellView: UICollectionViewCell, cell: ImageCellData) {
         if let cellView = cellView as? ImageCollectionViewCell,
             let cell = cell as? ColorImageCellData {
             cellView.setImage(img: cell)
         }
     }
-    
-    open override func imageFailed(cell: ImageCellData, imageView: UIImageView) {
-    }
+
+    public func imageFailed(cell: ImageCellData, imageView: UIImageView) {}
 }

@@ -10,6 +10,5 @@ import OOPhotoBrowser
 import FeedCollectionViewController
 
 open class ImageCellData: IDMPhoto, CellData {
-    open func cellDidBecomeVisible() {
-    }
+    open func cellDidBecomeVisible() {}
 }

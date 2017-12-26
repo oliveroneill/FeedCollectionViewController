@@ -13,7 +13,7 @@ import ImageFeedCollectionViewController
 
 class ErrorMessageTests: FBSnapshotTestCase {
     private var c: ErroringColorFeedViewController!
-    
+
     override func setUp() {
         super.setUp()
         // recordMode = true
@@ -22,6 +22,7 @@ class ErrorMessageTests: FBSnapshotTestCase {
             name: "Main",
             bundle: Bundle(for: ColorCaptionFeedViewController.self)
         )
+        errorMessage = "Something went wrong"
         let instantiated = storyboard.instantiateViewController(
             withIdentifier: "ErroringColorFeedViewController"
         ) as? ErroringColorFeedViewController
@@ -39,7 +40,7 @@ class ErrorMessageTests: FBSnapshotTestCase {
         }
         window.rootViewController = c
     }
-    
+
     override func tearDown() {
         super.tearDown()
     }
@@ -57,14 +58,14 @@ class ErrorMessageTests: FBSnapshotTestCase {
         ColorFeedViewController.length = -1
         testDisplay()
     }
-    
+
     func testCustomErrorMessage() {
         ColorFeedViewController.length = -1
-        c.errorMessage = "Something went wrong. Please try again later."
+        errorMessage = "Something went wrong. Please try again later."
         c.refreshFeed()
         testDisplay()
     }
-    
+
     func testHidingMessage() {
         ColorFeedViewController.length = -1
         c.refreshFeed()
@@ -85,7 +86,7 @@ class ErrorMessageTests: FBSnapshotTestCase {
             }
         }
     }
-    
+
     func testDisplay() {
         let expect = expectation(description: "Wait for data to load")
         // wait for main thread to display current content
