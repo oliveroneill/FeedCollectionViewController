@@ -45,27 +45,19 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, Phot
         }
     }
     /// Use this to specify a custom image view for the image browser
-    open weak var imageFeedPresenter: ImageFeedPresenter? {
-        didSet {
-            // When this is created we wrap the underlying data source in it.
-            // This allows us to use delegate methods that point to the
-            // `ImageCellData` type
-            if imageFeedPresenter != nil {
-                wrappedDelegate = WrappedFeedDelegate(presenter: self)
-                // TODO: wrapping this delegate means that users of the library
-                // cannot use it themselves
-                feedDelegate = wrappedDelegate
-            } else {
-                // deallocate these when set to nil
-                wrappedDelegate = nil
-                feedDelegate = nil
-            }
-        }
-    }
+    open weak var imageFeedPresenter: ImageFeedPresenter?
     /// Use this to receive events regarding the photo browser
     open weak var browserDelegate: PhotoBrowserDelegate?
 
     private var browser:IDMPhotoBrowser?
+
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        wrappedDelegate = WrappedFeedDelegate(presenter: self)
+        // TODO: wrapping this delegate means that users of the library
+        // cannot use it themselves
+        feedDelegate = wrappedDelegate
+    }
 
     // Add new views to the photo browser that will hide on tap
     open func addToolbarView(view: UIView) {
