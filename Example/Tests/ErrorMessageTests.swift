@@ -22,6 +22,8 @@ class ErrorMessageTests: FBSnapshotTestCase {
             name: "Main",
             bundle: Bundle(for: ColorCaptionFeedViewController.self)
         )
+        // Reset the default error message
+        // TODO: doesn't feel good to have this static variable
         errorMessage = "Something went wrong"
         let instantiated = storyboard.instantiateViewController(
             withIdentifier: "ErroringColorFeedViewController"
