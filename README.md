@@ -142,6 +142,9 @@ device by enabling `recordMode` in `setUp()` and then re-running the test with
 it off.
 
 ## Todo
+- Allow properties to be accessed via IBOutlets. This looks a little complicate
+with the current setup, due to having default implementations for
+`FeedDataSource`. I may need to break backwards compatibility.
 - Better tests. Currently I've only implemented snapshot tests
 - The snapshot tests are based on timers where something like
 [EarlGrey](https://github.com/google/EarlGrey) would be better suited but I
