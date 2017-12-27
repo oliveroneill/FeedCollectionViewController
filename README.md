@@ -19,6 +19,21 @@ images. ImageFeedCollectionViewController uses a [fork](https://github.com/olive
 of [IDMPhotoBrowser](https://github.com/ideaismobile/IDMPhotoBrowser),
 so that tapping on images lets you scroll through photos indefinitely.
 
+## Migrating to version 2
+With version 2, the framework uses a delegate architecture to separate the
+concerns of error cases, data sources and UI events. This requires:
+- Implementing protocols as needed
+- Setting the properties on the controller
+The example project has been updated to reflect this. For a simple use case,
+you can just implement the `ImageFeedDataSource` protocol and then call:
+```swift
+    imageFeedSource = self
+```
+inside `viewDidLoad` or wherever appropriate, on your sublcassed
+`ImageFeedCollectionViewController`. The [Usage](#usage) section below
+goes into detail of using this framework, as well as where each method
+has been moved to.
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
