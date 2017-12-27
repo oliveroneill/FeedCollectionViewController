@@ -57,7 +57,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
         newly loaded images
      */
     public final func loadMoreImages(browser:ImageLoadDelegate?) {
-        feedDataSource?.getCells(start: cellData.count, callback: { data in
+        feedDataSource?.getCells(start: cellData.count, callback: { [unowned self] data in
             // if there's nothing to add then don't do anything
             if data.count == 0 {
                 return
@@ -142,7 +142,7 @@ extension FeedCollectionViewController {
             CGPoint(x: 0, y: -refreshControl.frame.size.height),
             animated: true
         )
-        dataSource.getCells(start: 0, callback: { cellData in
+        dataSource.getCells(start: 0, callback: { [unowned self] cellData in
             self.cellData = cellData
             DispatchQueue.mainSyncSafe {
                 self.collectionView?.reloadData()
