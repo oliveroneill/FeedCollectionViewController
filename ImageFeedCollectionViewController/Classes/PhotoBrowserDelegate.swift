@@ -8,7 +8,7 @@
 import UIKit
 
 public protocol PhotoBrowserDelegate: class {
-    func imageDidFail(cell:ImageCellData, imageView:UIImageView)
-    func setupToolbar(toolbar:UIToolbar, cell:ImageCellData)
-    func didShowPhoto(cell:ImageCellData)
+    func imageDidFail(cell: ImageCellData, imageView: UIImageView)
+    func setupToolbar(toolbar: UIToolbar, cell: ImageCellData)
+    func didShowPhoto(cell: ImageCellData)
 }

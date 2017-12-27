@@ -8,6 +8,10 @@
 import UIKit
 import FeedCollectionViewController
 
+/**
+    A wrapped class so that we can use custom `ImageCellData` delegates that
+    communicate within `FeedCollectionView`s protocols.
+*/
 class WrappedFeedDataSource: FeedDataSource {
     private let imageDataSource: ImageFeedDataSource
     init(imageSource: ImageFeedDataSource) {

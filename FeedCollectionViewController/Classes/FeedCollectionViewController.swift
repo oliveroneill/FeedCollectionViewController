@@ -21,23 +21,25 @@ private extension DispatchQueue {
 }
 
 /**
- * Subclass this for a simple interface for an infinite scrolling feed using
- * the standard `UICollectionViewController` setup
- *
- * To use this class you must override: `getReuseIdentifier`, `getCells` and
- * `loadCell`
+    Subclass this for a simple interface for an infinite scrolling feed using
+    the standard `UICollectionViewController` setup.
+
+    To use this class you must set the `feedDataSource` variable. You can also
+    optionally override `errorDataSource`, `feedDelegate` and `errorDelegate`
+    for additional functionality.
  */
 open class FeedCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     private var defaultErrorSource = DefaultErrorDataSource()
     private var defaultErrorPresenter: ErrorPresenter?
 
-    // its required to specify a data source
+    /// Required to specify a data source
     open weak var feedDataSource: FeedDataSource?
-    // set this for customised error messages
+    /// Set this for customised error messages
     open weak var errorDataSource: ErrorDataSource?
-    // additional delegates
+    /// Additional delegates
     open weak var feedDelegate: FeedDelegate?
-    open weak var errorDelegate: ErrorPresenter?
+    /// Use for customised actions on error cases
+    open weak var errorPresenter: ErrorPresenter?
 
     private var cellData: [CellData] = []
     private let refreshControl = UIRefreshControl()
@@ -47,12 +49,12 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
     private var errorText:UITextView?
 
     /**
-     * Call this to load new images. Optionally specify a `ImageLoadDelegate` if
-     * you wish to be notified via `ImageLoadDelegate.imagesLoaded()` when new
-     * images have been created
-     *
-     * @param browser - optionally specified to notify additional views of newly
-     * loaded images
+        Call this to load new images. Optionally specify a `ImageLoadDelegate`
+        if you wish to be notified via `ImageLoadDelegate.imagesLoaded()` when
+        new images have been created.
+
+        - Parameter browser: Optionally specified to notify additional views of
+        newly loaded images
      */
     public final func loadMoreImages(browser:ImageLoadDelegate?) {
         feedDataSource?.getCells(start: cellData.count, callback: { data in
@@ -120,17 +122,17 @@ extension FeedCollectionViewController {
             return
         }
         // set a default if its not already set
-        if errorDelegate == nil {
+        if errorPresenter == nil {
             // store in strong reference variable first
             defaultErrorPresenter = DefaultErrorPresenter(parentView: c)
-            errorDelegate = defaultErrorPresenter
+            errorPresenter = defaultErrorPresenter
         }
         // safe default
         errorDataSource = errorDataSource ?? defaultErrorSource
     }
 
     @objc public final func refresh() {
-        errorDelegate?.hideErrorText()
+        errorPresenter?.hideErrorText()
         guard let dataSource = feedDataSource else {
             return
         }
@@ -148,7 +150,7 @@ extension FeedCollectionViewController {
                 // scroll to hide refresh control
                 self.collectionView?.setContentOffset(.zero, animated: true)
                 if cellData.count == 0 {
-                    self.errorDelegate?.showErrorText(
+                    self.errorPresenter?.showErrorText(
                         message: self.errorDataSource?.getErrorMessage() ?? ""
                     )
                 }

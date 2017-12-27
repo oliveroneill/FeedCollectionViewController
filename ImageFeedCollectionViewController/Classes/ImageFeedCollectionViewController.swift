@@ -16,16 +16,19 @@ private extension Collection {
 }
 
 /**
- * Subclass this for an infinite scrolling image feed with image browser built
- * in. You must implement the corresponding image methods as opposed to
- * `FeedCollectionViewController`s methods.
- *
- * To use this class you must override: `getImageReuseIdentifier`,
- * `getImageCells` and `loadImageCell`
+    Subclass this for an infinite scrolling image feed with image browser built
+    in. You should set `imageFeedSource` here as opposed to `feedDataSource`
+    from `FeedCollectionViewController`.
+
+    NOTE: do not set `feedDelegate` within this class, it is used to display
+    the photo browser. You can access selection events via `browserDelegate`.
  */
 open class ImageFeedCollectionViewController: FeedCollectionViewController, PhotoBrowserPresenter, IDMPhotoDataSource, IDMPhotoBrowserDelegate {
+    // Keep strong references here that will be given to
+    // `FeedCollectionViewController`
     private var wrappedDataSource: WrappedFeedDataSource?
-    private var wrappedPresenter: WrappedFeedPresenter?
+    private var wrappedDelegate: WrappedFeedDelegate?
+    /// Required to specify a data source
     open weak var imageFeedSource: ImageFeedDataSource? {
         didSet {
             // When this is created we wrap the underlying data source in it.
@@ -41,24 +44,25 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, Phot
             }
         }
     }
+    /// Use this to specify a custom image view for the image browser
     open weak var imageFeedPresenter: ImageFeedPresenter? {
         didSet {
             // When this is created we wrap the underlying data source in it.
             // This allows us to use delegate methods that point to the
             // `ImageCellData` type
-            if let presenter = imageFeedPresenter {
-                wrappedPresenter = WrappedFeedPresenter(
-                    presenter: presenter,
-                    browserPresenter: self
-                )
-                feedDelegate = wrappedPresenter
+            if imageFeedPresenter != nil {
+                wrappedDelegate = WrappedFeedDelegate(presenter: self)
+                // TODO: wrapping this delegate means that users of the library
+                // cannot use it themselves
+                feedDelegate = wrappedDelegate
             } else {
                 // deallocate these when set to nil
-                wrappedPresenter = nil
+                wrappedDelegate = nil
                 feedDelegate = nil
             }
         }
     }
+    /// Use this to receive events regarding the photo browser
     open weak var browserDelegate: PhotoBrowserDelegate?
 
     private var browser:IDMPhotoBrowser?

@@ -9,11 +9,11 @@
 import OOPhotoBrowser
 
 /**
- * To create your own custom caption view, subclass this view
- * and override `setUpCaption()` and `sizeThatFits()` (as well as any other
- * UIView methods that you see fit)
- *
- * This is the same parameters as `IDMCaptionView`
+    To create your own custom caption view, subclass this view
+    and override `setUpCaption()` and `sizeThatFits()` (as well as any other
+    UIView methods that you see fit)
+
+    This has the same parameters as `IDMCaptionView`
  */
 open class SingleImageView: IDMCaptionView {
     public let cell:ImageCellData

@@ -10,9 +10,9 @@ import UIKit
 private let textHeight: CGFloat = 50
 
 /**
- * A default view for displaying errors within the feed.
- * This will center the text within a specified container and handle multiple
- * line error messages as well as the formatting
+    A default view for displaying errors within the feed.
+    This will center the text within a specified container and handle multiple
+    line error messages as well as the formatting.
  */
 class AdjustingErrorView: UITextView {
     var containerToCenterText:UIView? {

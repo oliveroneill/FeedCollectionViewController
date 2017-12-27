@@ -13,7 +13,7 @@ import ImageFeedCollectionViewController
 // Default error message. Used in testing
 var errorMessage: String = "Something went wrong"
 class ErroringColorFeedViewController: ColorFeedViewController {
-    class CustomErrorDataSource: ErrorDataSource {
+    private class CustomErrorDataSource: ErrorDataSource {
         func getErrorMessage() -> String {
             return errorMessage
         }

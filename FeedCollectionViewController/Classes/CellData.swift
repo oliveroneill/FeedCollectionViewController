@@ -7,13 +7,13 @@
 //
 
 /**
- * The data corresponding to an individual cell in a
- * `FeedCollectionViewController`
- */
+    The data corresponding to an individual cell in a
+    `FeedCollectionViewController`.
+*/
 public protocol CellData {
     /**
-     * This function is called when a new cell is visible. This should be used
-     * to initialise the cells viewing components
+        This function is called when a new cell is visible. This should be used
+        to initialise the cells view components
      */
     func cellDidBecomeVisible()
 }

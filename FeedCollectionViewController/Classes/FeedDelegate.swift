@@ -9,11 +9,11 @@ import UIKit
 
 public protocol FeedDelegate: class {
     /**
-     * Called when a cell is tapped on. Consider implementing
-     * `ImageLoadDelegate` if you plan on loading more images from a separate
-     * view.
-     * @param index - the index of the cell
-     * @param cell - the data of the cell selected
+        Called when a cell is tapped on. Consider implementing
+        `ImageLoadDelegate` if you plan on loading more images from a separate
+        view.
+        Parameter index: The index of the cell
+        Parameter cell: The data of the cell selected
      */
     func didSelectCell(index: Int, cell: CellData)
 }

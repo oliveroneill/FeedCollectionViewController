@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/FeedCollectionViewController.svg?style=flat)](http://cocoapods.org/pods/FeedCollectionViewController)
 [![Platform](https://img.shields.io/cocoapods/p/FeedCollectionViewController.svg?style=flat)](http://cocoapods.org/pods/FeedCollectionViewController)
 
-A simple interface for creating data feeds so that data can be loaded
+A simple framework for creating data feeds so that data can be loaded
 dynamically as the user scrolls. This is inspired by scrolling through photos
 on Facebook or Instagram.
 
@@ -13,7 +13,7 @@ on Facebook or Instagram.
 
 <sup>Images taken from the example project that uses colours in place of real content.</sup>
 
-FeedCollectionViewController is a generic interface for setting up a simple
+FeedCollectionViewController is a generic framework for setting up a simple
 feed, whereas ImageFeedCollectionViewController is specifically set up for
 images. ImageFeedCollectionViewController uses a [fork](https://github.com/oliveroneill/OOPhotoBrowser)
 of [IDMPhotoBrowser](https://github.com/ideaismobile/IDMPhotoBrowser),
@@ -44,12 +44,19 @@ pod "ImageFeedCollectionViewController"
 ## Usage
 
 The set up is quite similar to `UICollectionViewController`, you must specify a
-reuse identifier and a `UICollectionViewCell` that should take its data from an
-implemented `CellData`.
+reuse identifier and a `UICollectionViewCell` that should take its data from a
+`CellData` implementation.
 
 FeedCollectionViewController:
 
 ``` swift
+open class ExampleImplementation: FeedCollectionViewController, FeedDataSource {
+
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        feedDataSource = self
+    }
+
     open func getReuseIdentifier(cell:CellData) -> String {
         // specifies the identifier of the cell, this can differ per cell
     }
@@ -67,6 +74,13 @@ FeedCollectionViewController:
 ImageFeedCollectionViewController:
 
 ``` swift
+open class ExampleImplementation: ImageFeedCollectionViewController, ImageFeedDataSource {
+
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        imageFeedSource = self
+    }
+
     open func getImageReuseIdentifier(cell: ImageCellData) -> String {
         // specifies the identifier of the cell, this can differ per cell
     }
@@ -85,9 +99,9 @@ You must have a custom `ImageCellData` implementation, this subclasses
 `IDMPhoto`, which will be used in the photo browser. To use with image
 URLs use `super.init(url: imageUrl)` within `ImageCellData`.
 
-To customise views in the ImageFeedCollectionViewController, you must
-implement `SingleImageView` and override relevant methods. The relevant
-methods are the same as those in `IDMCaptionView`.
+To customise views in the ImageFeedCollectionViewController, you can
+implement `SingleImageView` and set the `imageFeedPresenter` property.
+The relevant methods are the same as those in `IDMCaptionView`.
 ``` swift
     open override func setupCaption() {
         // Setup caption views
@@ -97,17 +111,13 @@ methods are the same as those in `IDMCaptionView`.
         // Return the height of the view, the width will be ignored
     }
 ```
-To receive updates when the displayed photo changes, override `didShowPhoto(cell:ImageCellData)`
-
-To receive image download failures from the photo browser, you can override
-`imageFailed(cell:ImageCellData)`.
-
-To customise the photo browser's toolbar, you can override
-`setupToolbar(toolbar:UIToolbar, cell:ImageCellData)` and make modifications
-as needed.
+To receive updates when the displayed photo changes, set the `browserDelegate`
+property. This will also give you callbacks on image failures and allow toolbar
+modifications.
 
 Custom error messages and views are also available for feed retrieval failure
-through `getErrorMessage` or `showErrorText`.
+through the `errorDataSource` property or the `errorPresenter` property for
+greater control of the views.
 
 ## Testing
 Testing is done through FBSnapshotTestCase, there are test result files included
