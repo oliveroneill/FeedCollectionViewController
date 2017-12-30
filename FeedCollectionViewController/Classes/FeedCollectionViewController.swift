@@ -41,10 +41,10 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
     /// Use for customised actions on error cases
     open weak var errorPresenter: ErrorPresenter?
 
-    private var cellData: [CellData] = []
+    public private(set) var cells: [CellData] = []
     private let refreshControl = UIRefreshControl()
-    private var start = -1
-    private var end = -1
+    private var start: Int?
+    private var end: Int?
 
     /**
         Call this to load new images. Optionally specify a `ImageLoadDelegate`
@@ -54,33 +54,26 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
         - Parameter browser: Optionally specified to notify additional views of
         newly loaded images
      */
-    public final func loadMoreImages(browser:ImageLoadDelegate?) {
-        feedDataSource?.getCells(start: cellData.count, callback: { [unowned self] data, _ in
+    public final func loadMoreImages(browser: ImageLoadDelegate?) {
+        feedDataSource?.getCells(start: cells.count, callback: { [unowned self] data, _ in
             // if there's nothing to add then don't do anything
             if data.count == 0 {
                 return
             }
             // keep track of last cell so that we only load new data
-            let size = self.cellData.count
-            self.cellData.append(contentsOf: data)
+            let size = self.cells.count
+            self.cells.append(contentsOf: data)
             // create indexes to load
-            let indexes = Array(size..<self.cellData.count).map {
+            let indexes = Array(size..<self.cells.count).map {
                 IndexPath(row: $0, section: 0)
             }
             DispatchQueue.mainSyncSafe {
                 self.collectionView?.insertItems(at: indexes)
                 self.collectionView?.reloadItems(at: indexes)
                 browser?.imagesLoaded()
-                // reset counters here so that data is completely refreshed
-                self.start = -1
-                self.end = -1
-                self.showVisibleImages()
+                self.newImagesLoaded()
             }
         })
-    }
-
-    public final func getCurrentCells() -> [CellData] {
-        return cellData
     }
 }
 
@@ -141,24 +134,32 @@ extension FeedCollectionViewController {
             animated: true
         )
         dataSource.getCells(start: 0, callback: { [unowned self] cellData, error in
-            self.cellData = cellData
+            self.cells = cellData
             DispatchQueue.mainSyncSafe {
                 collectionView.reloadData()
                 self.refreshControl.endRefreshing()
                 // scroll to hide refresh control
                 collectionView.setContentOffset(.zero, animated: true)
                 if cellData.count == 0 {
-                    self.errorPresenter?.showErrorText(
-                        in: collectionView,
-                        message: self.errorDataSource?.getErrorMessage(error: error) ?? ""
-                    )
+                    self.showError(collectionView: collectionView, error: error)
                 }
-                // reset counters here so that data is completely refreshed
-                self.start = -1
-                self.end = -1
-                self.showVisibleImages()
+                self.newImagesLoaded()
             }
         })
+    }
+
+    private final func showError(collectionView: UICollectionView, error: Error?) {
+        self.errorPresenter?.showErrorText(
+            in: collectionView,
+            message: self.errorDataSource?.getErrorMessage(error: error) ?? ""
+        )
+    }
+
+    private final func newImagesLoaded() {
+        // reset counters here so that data is completely refreshed
+        self.start = nil
+        self.end = nil
+        self.showVisibleImages()
     }
 
     private final func showVisibleImages() {
@@ -181,9 +182,9 @@ extension FeedCollectionViewController {
     }
 
     private final func newCellVisible(at index: Int) {
-        if index < cellData.count {
+        if index < cells.count {
             // set cell with image
-            cellData[index].cellDidBecomeVisible()
+            cells[index].cellDidBecomeVisible()
         }
     }
 }
@@ -193,12 +194,12 @@ extension FeedCollectionViewController {
     override open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         feedDelegate?.didSelectCell(
             index: indexPath.row,
-            cell: cellData[indexPath.row]
+            cell: cells[indexPath.row]
         )
     }
 
     override open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cellData.count
+        return cells.count
     }
 
     override open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -206,10 +207,10 @@ extension FeedCollectionViewController {
             return UICollectionViewCell()
         }
         // add safe default in case cells are deleted
-        if indexPath.row > cellData.count {
+        if indexPath.row > cells.count {
             return UICollectionViewCell()
         }
-        let c = cellData[indexPath.row]
+        let c = cells[indexPath.row]
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: dataSource.getReuseIdentifier(cell: c),
             for: indexPath

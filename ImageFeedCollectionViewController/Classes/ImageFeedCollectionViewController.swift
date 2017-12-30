@@ -78,12 +78,11 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, Phot
 // MARK: IDMPhotoDataSource methods
 extension ImageFeedCollectionViewController {
     public func photo(at index: UInt) -> IDMPhotoProtocol? {
-        let cells = getCurrentCells()
         return cells[Int(index)] as? ImageCellData
     }
 
     public func numberOfPhotos() -> Int32 {
-        return Int32(getCurrentCells().count)
+        return Int32(cells.count)
     }
     
     public func loadMoreImages(_ browser: IDMBrowserDelegate?) {
@@ -98,7 +97,7 @@ extension ImageFeedCollectionViewController {
 // MARK: IDMPhotoBrowserDelegate methods
 extension ImageFeedCollectionViewController {
     public func photoBrowser(_ photoBrowser: IDMPhotoBrowser, captionViewForPhotoAt index: UInt) -> IDMCaptionView? {
-        if let cell = getCurrentCells()[safe: Int(index)] as? ImageCellData {
+        if let cell = cells[safe: Int(index)] as? ImageCellData {
             if cell.caption != nil {
                 return imageFeedPresenter?.getSingleImageView(cell: cell)
             }
@@ -107,19 +106,19 @@ extension ImageFeedCollectionViewController {
     }
 
     public func photoBrowser(_ photoBrowser: IDMPhotoBrowser, imageFailed index: UInt, imageView: IDMTapDetectingImageView) {
-        if let cell = getCurrentCells()[safe: Int(index)] as? ImageCellData {
+        if let cell = cells[safe: Int(index)] as? ImageCellData {
             browserDelegate?.imageDidFail(cell: cell, imageView:imageView)
         }
     }
 
     public func photoBrowser(_ photoBrowser: IDMPhotoBrowser, setupToolbar index: UInt, toolbar: UIToolbar) {
-        if let cell = getCurrentCells()[safe: Int(index)] as? ImageCellData {
+        if let cell = cells[safe: Int(index)] as? ImageCellData {
             browserDelegate?.setupToolbar(toolbar: toolbar, cell: cell)
         }
     }
 
     public func photoBrowser(_ photoBrowser: IDMPhotoBrowser, didShowPhotoAt index: UInt) {
-        if let cell = getCurrentCells()[safe: Int(index)] as? ImageCellData {
+        if let cell = cells[safe: Int(index)] as? ImageCellData {
             browserDelegate?.didShowPhoto(cell: cell)
         }
     }
