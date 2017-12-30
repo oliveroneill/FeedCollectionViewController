@@ -142,9 +142,11 @@ device by enabling `recordMode` in `setUp()` and then re-running the test with
 it off.
 
 ## Todo
-- Allow properties to be accessed via IBOutlets. This looks a little complicate
+- Allow properties to be accessed via IBOutlets. This looks a little complicated
 with the current setup, due to having default implementations for
-`FeedDataSource`. I may need to break backwards compatibility.
+`FeedDataSource`. Looks like I need to move everything into classes or remove
+default for `getCellsPerRow`. See [this](https://stackoverflow.com/a/39604189)
+for more info.
 - Better tests. Currently I've only implemented snapshot tests
 - The snapshot tests are based on timers where something like
 [EarlGrey](https://github.com/google/EarlGrey) would be better suited but I
