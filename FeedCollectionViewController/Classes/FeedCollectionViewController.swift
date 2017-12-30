@@ -46,8 +46,6 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
     private var start = -1
     private var end = -1
 
-    private var errorText:UITextView?
-
     /**
         Call this to load new images. Optionally specify a `ImageLoadDelegate`
         if you wish to be notified via `ImageLoadDelegate.imagesLoaded()` when
@@ -182,10 +180,10 @@ extension FeedCollectionViewController {
         }
     }
 
-    private final func newCellVisible(at:Int) {
-        if at < cellData.count {
+    private final func newCellVisible(at index: Int) {
+        if index < cellData.count {
             // set cell with image
-            cellData[at].cellDidBecomeVisible()
+            cellData[index].cellDidBecomeVisible()
         }
     }
 }
@@ -227,11 +225,9 @@ extension FeedCollectionViewController {
         guard let dataSource = feedDataSource else {
             return .zero
         }
-        let screenRect = UIScreen.main.bounds
-        let screenWidth = screenRect.size.width
-        let cellWidth = screenWidth / CGFloat(dataSource.getCellsPerRow())
-        let size = CGSize(width: cellWidth, height: cellWidth)
-        return size
+        let width = collectionView.frame.size.width
+        let cellWidth = width / CGFloat(dataSource.getCellsPerRow())
+        return CGSize(width: cellWidth, height: cellWidth)
     }
 
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
