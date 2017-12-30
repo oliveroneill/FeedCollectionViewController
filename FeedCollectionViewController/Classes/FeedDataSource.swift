@@ -9,6 +9,8 @@ import UIKit
 
 private let DEFAULT_CELLS_PER_ROW = 2
 
+public typealias CellDataCallback = (([CellData], Error?) -> Void)
+
 public protocol FeedDataSource: class {
     /**
         Get the reuse identifier for the cell, used to determine how to load
@@ -49,7 +51,7 @@ public protocol FeedDataSource: class {
         - Parameter callback: Return the corresponding cells through this
         callback
      */
-    func getCells(start: Int, callback: @escaping (([CellData]) -> Void))
+    func getCells(start: Int, callback: @escaping CellDataCallback)
 }
 
 public extension FeedDataSource {

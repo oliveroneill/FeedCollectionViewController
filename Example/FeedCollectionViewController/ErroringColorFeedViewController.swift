@@ -14,7 +14,7 @@ import ImageFeedCollectionViewController
 var errorMessage: String = "Something went wrong"
 class ErroringColorFeedViewController: ColorFeedViewController {
     private class CustomErrorDataSource: ErrorDataSource {
-        func getErrorMessage() -> String {
+        func getErrorMessage(error: Error?) -> String {
             return errorMessage
         }
     }

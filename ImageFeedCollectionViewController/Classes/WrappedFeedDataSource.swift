@@ -24,9 +24,9 @@ class WrappedFeedDataSource: FeedDataSource {
         }
     }
 
-    func getCells(start: Int, callback: @escaping (([CellData]) -> Void)) {
-        imageDataSource.getImageCells(start: start, callback: { cells in
-            callback(cells)
+    func getCells(start: Int, callback: @escaping CellDataCallback) {
+        imageDataSource.getImageCells(start: start, callback: { cells, error in
+            callback(cells, error)
         })
     }
 

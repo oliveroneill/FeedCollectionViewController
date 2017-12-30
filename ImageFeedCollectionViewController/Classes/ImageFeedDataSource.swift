@@ -7,6 +7,8 @@
 
 import UIKit
 
+public typealias ImageCellDataCallback = (([ImageCellData], Error?) -> Void)
+
 /**
     A protocol based on `FeedCollectionViewController`'s `FeedDataSource` with
     functions specific to `ImageCellData`.
@@ -34,7 +36,7 @@ public protocol ImageFeedDataSource: class {
      - Parameter callback: Return the corresponding cells through this
      callback
      */
-    func getImageCells(start:Int, callback: @escaping (([ImageCellData]) -> Void))
+    func getImageCells(start:Int, callback: @escaping ImageCellDataCallback)
 
     /**
      Called when a cell is being created from specified `ImageCellData`. Set up

@@ -40,12 +40,12 @@ class ColorCaptionFeedViewController: ColorFeedViewController, PhotoBrowserDeleg
         return ExampleSingleImageView(cell: cell)
     }
 
-    override func getImageCells(start: Int, callback: @escaping (([ImageCellData]) -> Void)) {
-        super.getImageCells(start: start, callback: { data in
+    override func getImageCells(start: Int, callback: @escaping ImageCellDataCallback) {
+        super.getImageCells(start: start, callback: { data, _ in
             for cell in data {
                 cell.caption = "Test caption example"
             }
-            callback(data)
+            callback(data, nil)
         })
     }
     

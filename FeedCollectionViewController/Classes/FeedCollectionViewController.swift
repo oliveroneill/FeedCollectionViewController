@@ -57,7 +57,7 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
         newly loaded images
      */
     public final func loadMoreImages(browser:ImageLoadDelegate?) {
-        feedDataSource?.getCells(start: cellData.count, callback: { [unowned self] data in
+        feedDataSource?.getCells(start: cellData.count, callback: { [unowned self] data, _ in
             // if there's nothing to add then don't do anything
             if data.count == 0 {
                 return
@@ -118,13 +118,10 @@ extension FeedCollectionViewController {
     }
 
     private final func setDelegateDefaults() {
-        guard let c = collectionView else {
-            return
-        }
         // set a default if its not already set
         if errorPresenter == nil {
             // store in strong reference variable first
-            defaultErrorPresenter = DefaultErrorPresenter(parentView: c)
+            defaultErrorPresenter = DefaultErrorPresenter()
             errorPresenter = defaultErrorPresenter
         }
         // safe default
@@ -132,26 +129,30 @@ extension FeedCollectionViewController {
     }
 
     @objc public final func refresh() {
-        errorPresenter?.hideErrorText()
+        guard let collectionView = self.collectionView else {
+            return
+        }
+        errorPresenter?.hideErrorText(in: collectionView)
         guard let dataSource = feedDataSource else {
             return
         }
         refreshControl.beginRefreshing()
         // scroll to reveal spinning wheel
-        collectionView?.setContentOffset(
+        collectionView.setContentOffset(
             CGPoint(x: 0, y: -refreshControl.frame.size.height),
             animated: true
         )
-        dataSource.getCells(start: 0, callback: { [unowned self] cellData in
+        dataSource.getCells(start: 0, callback: { [unowned self] cellData, error in
             self.cellData = cellData
             DispatchQueue.mainSyncSafe {
-                self.collectionView?.reloadData()
+                collectionView.reloadData()
                 self.refreshControl.endRefreshing()
                 // scroll to hide refresh control
-                self.collectionView?.setContentOffset(.zero, animated: true)
+                collectionView.setContentOffset(.zero, animated: true)
                 if cellData.count == 0 {
                     self.errorPresenter?.showErrorText(
-                        message: self.errorDataSource?.getErrorMessage() ?? ""
+                        in: collectionView,
+                        message: self.errorDataSource?.getErrorMessage(error: error) ?? ""
                     )
                 }
                 // reset counters here so that data is completely refreshed

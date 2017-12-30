@@ -8,7 +8,7 @@
 import UIKit
 
 class DefaultErrorDataSource: ErrorDataSource {
-    func getErrorMessage() -> String {
+    func getErrorMessage(error: Error?) -> String {
         return "No content"
     }
 }

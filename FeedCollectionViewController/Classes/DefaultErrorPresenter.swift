@@ -8,25 +8,17 @@
 import UIKit
 
 class DefaultErrorPresenter: ErrorPresenter {
-    private weak var parentView: UIView?
     private var errorText: UITextView?
 
-    init(parentView: UIView) {
-        self.parentView = parentView
-    }
-
-    func showErrorText(message:String) {
-        hideErrorText()
-        guard let parentView = parentView else {
-            return
-        }
-        let errorDisplay = AdjustingErrorView(centerTextWithin: parentView)
+    func showErrorText(in view: UIView, message:String) {
+        hideErrorText(in: view)
+        let errorDisplay = AdjustingErrorView(centerTextWithin: view)
         errorDisplay.text = message
         errorText = errorDisplay
-        parentView.addSubview(errorDisplay)
+        view.addSubview(errorDisplay)
     }
 
-    func hideErrorText() {
+    func hideErrorText(in view: UIView) {
         guard let text = errorText else {
             return
         }

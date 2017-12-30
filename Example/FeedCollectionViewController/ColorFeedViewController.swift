@@ -52,7 +52,7 @@ open class ColorFeedViewController: ImageFeedCollectionViewController, ImageFeed
         return self.getSingleImageView(cell: cell)
     }
 
-    public func getImageCells(start: Int, callback: @escaping (([ImageCellData]) -> Void)) {
+    public func getImageCells(start: Int, callback: @escaping ImageCellDataCallback) {
         if loadingDelay == 0 {
             self.loadImages(start: start, callback: callback)
             return
@@ -63,10 +63,10 @@ open class ColorFeedViewController: ImageFeedCollectionViewController, ImageFeed
         }
     }
 
-    func loadImages(start: Int, callback: @escaping (([ImageCellData]) -> Void)) {
+    func loadImages(start: Int, callback: @escaping ImageCellDataCallback) {
         // limit the cells to LENGTH
         if self.collectionLength > ColorFeedViewController.length {
-            callback([])
+            callback([], nil)
             return
         }
         var cells:[ImageCellData] = []
@@ -77,7 +77,7 @@ open class ColorFeedViewController: ImageFeedCollectionViewController, ImageFeed
             let color = UIColor(hue: CGFloat(self.hue), saturation: 1, brightness: 1, alpha: 1)
             cells.append(ColorImageCellData(color: color, delay: self.imageDelay))
         }
-        callback(cells)
+        callback(cells, nil)
         self.collectionLength += ColorFeedViewController.QUERY_SIZE
     }
 
