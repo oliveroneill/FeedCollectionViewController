@@ -10,10 +10,10 @@ import UIKit
 public protocol FeedDelegate: class {
     /**
         Called when a cell is tapped on. Consider implementing
-        `ImageLoadDelegate` if you plan on loading more images from a separate
-        view.
-        Parameter index: The index of the cell
-        Parameter cell: The data of the cell selected
+        `CellDataLoadDelegate` if you plan on loading more cells from a
+        separate view.
+        - Parameter index: The index of the cell
+        - Parameter cell: The data of the cell selected
      */
     func didSelectCell(index: Int, cell: CellData)
 }

@@ -90,7 +90,7 @@ extension ImageFeedCollectionViewController {
         if let b = browser {
             cellBrowser = IDMCellBrowser(browser: b)
         }
-        super.loadMoreImages(browser: cellBrowser)
+        super.loadMoreCells(loadDelegate: cellBrowser)
     }
 }
 

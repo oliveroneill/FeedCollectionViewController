@@ -9,14 +9,14 @@
 import FeedCollectionViewController
 import OOPhotoBrowser
 
-class IDMCellBrowser: ImageLoadDelegate {
+class IDMCellBrowser: CellDataLoadDelegate {
     private var browser: IDMBrowserDelegate
 
     init(browser: IDMBrowserDelegate) {
         self.browser = browser
     }
 
-    public func imagesLoaded() {
+    public func cellDataLoaded() {
         browser.imagesLoaded()
     }
 

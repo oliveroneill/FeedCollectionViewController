@@ -47,14 +47,14 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
     private var end: Int?
 
     /**
-        Call this to load new images. Optionally specify a `ImageLoadDelegate`
-        if you wish to be notified via `ImageLoadDelegate.imagesLoaded()` when
-        new images have been created.
+        Call this to load new cells. Optionally specify a `CellDataLoadDelegate`
+        if you wish to be notified via `CellDataLoadDelegate.cellDataLoaded()`
+        when new cells have been created.
 
-        - Parameter browser: Optionally specified to notify additional views of
-        newly loaded images
+        - Parameter loadDelegate: Optionally specified to notify additional
+        views of newly loaded cells
      */
-    public final func loadMoreImages(browser: ImageLoadDelegate?) {
+    public final func loadMoreCells(loadDelegate: CellDataLoadDelegate?) {
         feedDataSource?.getCells(start: cells.count, callback: { [unowned self] data, _ in
             // if there's nothing to add then don't do anything
             if data.count == 0 {
@@ -70,8 +70,8 @@ open class FeedCollectionViewController: UICollectionViewController, UICollectio
             DispatchQueue.mainSyncSafe {
                 self.collectionView?.insertItems(at: indexes)
                 self.collectionView?.reloadItems(at: indexes)
-                browser?.imagesLoaded()
-                self.newImagesLoaded()
+                loadDelegate?.cellDataLoaded()
+                self.newCellsLoaded()
             }
         })
     }
@@ -143,7 +143,7 @@ extension FeedCollectionViewController {
                 if cellData.count == 0 {
                     self.showError(collectionView: collectionView, error: error)
                 }
-                self.newImagesLoaded()
+                self.newCellsLoaded()
             }
         })
     }
@@ -155,14 +155,14 @@ extension FeedCollectionViewController {
         )
     }
 
-    private final func newImagesLoaded() {
+    private final func newCellsLoaded() {
         // reset counters here so that data is completely refreshed
         self.start = nil
         self.end = nil
-        self.showVisibleImages()
+        self.showVisibleCells()
     }
 
-    private final func showVisibleImages() {
+    private final func showVisibleCells() {
         collectionView?.layoutIfNeeded()
         guard let visibles = collectionView?.indexPathsForVisibleItems else {
             return
@@ -183,7 +183,6 @@ extension FeedCollectionViewController {
 
     private final func newCellVisible(at index: Int) {
         if index < cells.count {
-            // set cell with image
             cells[index].cellDidBecomeVisible()
         }
     }
@@ -240,17 +239,17 @@ extension FeedCollectionViewController {
 //MARK: UIScrollView methods
 extension FeedCollectionViewController {
     override open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        showVisibleImages()
+        showVisibleCells()
         let bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height
-        // load more images when the user has scrolled 70% of the current feed
+        // load more cells when the user has scrolled 70% of the current feed
         if bottomEdge >= scrollView.contentSize.height * 0.7 {
-            loadMoreImages(browser: nil)
+            loadMoreCells(loadDelegate: nil)
         }
     }
     
     override open func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
-            showVisibleImages()
+            showVisibleCells()
         }
     }
 }
