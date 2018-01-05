@@ -17,19 +17,18 @@ public extension UIImage {
         UIRectFill(rect)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-
         guard let cgImage = image?.cgImage else { return nil }
         self.init(cgImage: cgImage)
     }
 }
 
 class ColorImageCellData: ImageCellData {
-    var imageView: UIImageView? {
+    var image: UIImage? {
         didSet {
-            self.imageView?.image = self.image
+            self.imageDidChange?()
         }
     }
-    private var image: UIImage?
+    var imageDidChange: (() -> ())?
     private var color: UIColor = .red
     private var loadingDelay: Double = 0.1
 
@@ -42,19 +41,18 @@ class ColorImageCellData: ImageCellData {
     override func cellDidBecomeVisible() {
         // use 0.1 second delay instead of a network request
         if loadingDelay == 0 {
-            setColour()
+            setColor()
             return
         }
         let ms = Int(loadingDelay * 1000)
         DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(ms)) { [unowned self] in
             DispatchQueue.main.sync { [unowned self] in
-                self.setColour()
+                self.setColor()
             }
         }
     }
 
-    func setColour() {
+    func setColor() {
         self.image = UIImage(color: self.color)
-        self.imageView?.image = self.image
     }
 }

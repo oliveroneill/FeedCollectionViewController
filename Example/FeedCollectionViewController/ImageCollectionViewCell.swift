@@ -10,8 +10,13 @@ import UIKit
 
 class ImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
-    func setImage(img: ColorImageCellData) {
-        imageView.image = nil
-        img.imageView = imageView
+    var image: ColorImageCellData? {
+        didSet {
+            let imageDidChange = { [unowned self] in
+                self.imageView.image = self.image?.image
+            }
+            image?.imageDidChange = imageDidChange
+            imageDidChange()
+        }
     }
 }

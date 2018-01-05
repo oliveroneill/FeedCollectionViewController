@@ -11,16 +11,13 @@ import ImageFeedCollectionViewController
 
 extension UIColor {
     func toHexString() -> String {
-        var r:CGFloat = 0
-        var g:CGFloat = 0
-        var b:CGFloat = 0
-        var a:CGFloat = 0
-        
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
         getRed(&r, green: &g, blue: &b, alpha: &a)
-        
-        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
-        
-        return NSString(format:"#%06x", rgb) as String
+        let rgb: Int = (Int)(r * 255) << 16 | (Int)(g * 255) << 8 | (Int)(b * 255) << 0
+        return NSString(format: "#%06x", rgb) as String
     }
 }
 
@@ -58,7 +55,7 @@ open class ColorFeedViewController: ImageFeedCollectionViewController, ImageFeed
             return
         }
         // delay for 1 second in place of an actual network request
-        DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(loadingDelay)) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(loadingDelay)) { [unowned self] in
             self.loadImages(start: start, callback: callback)
         }
     }
@@ -69,11 +66,11 @@ open class ColorFeedViewController: ImageFeedCollectionViewController, ImageFeed
             callback([], nil)
             return
         }
-        var cells:[ImageCellData] = []
+        var cells: [ImageCellData] = []
         // will only return QUERY_SIZE at a time
         for _ in 0..<ColorFeedViewController.QUERY_SIZE {
             // increase hue slowly for each cell
-            self.hue += 1.0/Double(ColorFeedViewController.length)
+            self.hue += 1.0 / Double(ColorFeedViewController.length)
             let color = UIColor(hue: CGFloat(self.hue), saturation: 1, brightness: 1, alpha: 1)
             cells.append(ColorImageCellData(color: color, delay: self.imageDelay))
         }
@@ -88,9 +85,9 @@ open class ColorFeedViewController: ImageFeedCollectionViewController, ImageFeed
     public func loadImageCell(cellView: UICollectionViewCell, cell: ImageCellData) {
         if let cellView = cellView as? ImageCollectionViewCell,
             let cell = cell as? ColorImageCellData {
-            cellView.setImage(img: cell)
+            cellView.image = cell
         }
     }
 
-    public func imageFailed(cell: ImageCellData, imageView: UIImageView) {}
+    public func imageFailed(cell: ImageCellData, imageView: UIImageView) { }
 }
