@@ -151,6 +151,8 @@ for more info.
 - The snapshot tests are based on timers where something like
 [EarlGrey](https://github.com/google/EarlGrey) would be better suited but I
 had trouble with timeout errors when attempting this
+- `ImageCellData` inherits from `IDMPhoto` which makes the cell data tied to
+view code, when it's preferable for it to be a "dumb" model, usually a struct.
 
 ## Author
 
