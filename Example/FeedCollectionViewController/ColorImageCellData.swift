@@ -17,44 +17,44 @@ public extension UIImage {
         UIRectFill(rect)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
+
         guard let cgImage = image?.cgImage else { return nil }
         self.init(cgImage: cgImage)
     }
 }
 
 class ColorImageCellData: ImageCellData {
-    private var imgView:UIImageView?
-    private var image:UIImage?
-    private var color:UIColor = .red
+    var imageView: UIImageView? {
+        didSet {
+            self.imageView?.image = self.image
+        }
+    }
+    private var image: UIImage?
+    private var color: UIColor = .red
     private var loadingDelay: Double = 0.1
-    
+
     convenience init(color: UIColor, delay: Double) {
         self.init(image: UIImage(color: color))
         self.color = color
         self.loadingDelay = delay
     }
-    
+
     override func cellDidBecomeVisible() {
         // use 0.1 second delay instead of a network request
         if loadingDelay == 0 {
-            setImage()
+            setColour()
             return
         }
-        DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(Int(loadingDelay*1000))) {
-            DispatchQueue.main.sync {
-                self.setImage()
+        let ms = Int(loadingDelay * 1000)
+        DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(ms)) { [unowned self] in
+            DispatchQueue.main.sync { [unowned self] in
+                self.setColour()
             }
         }
     }
 
-    func setImage() {
+    func setColour() {
         self.image = UIImage(color: self.color)
-        self.imgView?.image = self.image
-    }
-
-    func setImageView(imageView:UIImageView) {
-        self.imgView = imageView
-        self.imgView?.image = self.image
+        self.imageView?.image = self.image
     }
 }

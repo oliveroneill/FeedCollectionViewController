@@ -12,6 +12,6 @@ class ImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     func setImage(img: ColorImageCellData) {
         imageView.image = nil
-        img.setImageView(imageView: imageView)
+        img.imageView = imageView
     }
 }
