@@ -47,18 +47,25 @@ class ColorFeedViewControllerTests: FBSnapshotTestCase {
         super.tearDown()
     }
 
-    func verifyScreen() {
+    func verifyScreen(file: StaticString = #file, line: UInt = #line) {
         guard let view = self.c.view else {
-            XCTFail("Unexpected nil")
+            self.recordFailure(
+                withDescription: "Unexpected nil",
+                inFile: String(describing: file),
+                atLine: Int(line), expected: true
+            )
             return
         }
-        self.FBSnapshotVerifyView(view)
-        self.FBSnapshotVerifyLayer(view.layer)
+        self.FBSnapshotVerifyView(view, file: file, line: line)
+        self.FBSnapshotVerifyLayer(view.layer, file: file, line: line)
     }
 
-    func scrollTo(index:Int, callback: @escaping (() -> Void)) {
+    func scrollTo(index:Int, callback: @escaping (() -> Void), file: String = #file, line: Int = #line) {
         guard let collectionView = self.c.collectionView else {
-            XCTFail("Unexpected nil")
+            self.recordFailure(
+                withDescription: "Unexpected nil", inFile: file, atLine: line,
+                expected: true
+            )
             return
         }
         collectionView.scrollToItem(
