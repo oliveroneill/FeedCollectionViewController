@@ -30,7 +30,7 @@ class AdjustingErrorView: UITextView {
     /**
      * Create a text view that will center the text within the container view
      */
-    convenience init(centerTextWithin container:UIView) {
+    convenience init(centerTextWithin container: UIView) {
         // set frame to center within view
         self.init(
             frame: CGRect(
@@ -45,6 +45,15 @@ class AdjustingErrorView: UITextView {
 
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
+        commonInit()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+
+    private func commonInit() {
         // default formatting and style
         self.font = UIFont(name: "Helvetica", size: 32)
         self.textAlignment = .center
@@ -52,10 +61,6 @@ class AdjustingErrorView: UITextView {
         self.isSelectable = false
         self.isEditable = false
         self.isScrollEnabled = false
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
     // Adjust size for new message or new containing view
