@@ -23,7 +23,7 @@ private extension Collection {
     NOTE: do not set `feedDelegate` within this class, it is used to display
     the photo browser. You can access selection events via `browserDelegate`.
  */
-open class ImageFeedCollectionViewController: FeedCollectionViewController, PhotoBrowserPresenter, IDMPhotoDataSource, IDMPhotoBrowserDelegate {
+open class ImageFeedCollectionViewController: FeedCollectionViewController {
     // Keep strong references here that will be given to
     // `FeedCollectionViewController`
     private var wrappedDataSource: WrappedFeedDataSource?
@@ -63,7 +63,8 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, Phot
     open func addToolbarView(view: UIView) {
         browser?.addToolbarView(view)
     }
-
+}
+extension ImageFeedCollectionViewController: PhotoBrowserPresenter {
     func showPhotoBrowser(index: Int) {
         guard let browser = IDMPhotoBrowser(dataSource: self) else {
             return
@@ -76,7 +77,7 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController, Phot
 }
 
 // MARK: IDMPhotoDataSource methods
-extension ImageFeedCollectionViewController {
+extension ImageFeedCollectionViewController: IDMPhotoDataSource {
     public func photo(at index: UInt) -> IDMPhotoProtocol? {
         return cells[Int(index)] as? ImageCellData
     }
@@ -95,7 +96,7 @@ extension ImageFeedCollectionViewController {
 }
 
 // MARK: IDMPhotoBrowserDelegate methods
-extension ImageFeedCollectionViewController {
+extension ImageFeedCollectionViewController: IDMPhotoBrowserDelegate {
     public func photoBrowser(_ photoBrowser: IDMPhotoBrowser, captionViewForPhotoAt index: UInt) -> IDMCaptionView? {
         if let cell = cells[safe: Int(index)] as? ImageCellData {
             if cell.caption != nil {

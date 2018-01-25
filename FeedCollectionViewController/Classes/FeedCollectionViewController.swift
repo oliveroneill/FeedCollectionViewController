@@ -28,7 +28,7 @@ private extension DispatchQueue {
     optionally override `errorDataSource`, `feedDelegate` and `errorDelegate`
     for additional functionality.
  */
-open class FeedCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+open class FeedCollectionViewController: UICollectionViewController {
     private var defaultErrorSource = DefaultErrorDataSource()
     private var defaultErrorPresenter: ErrorPresenter?
 
@@ -220,7 +220,7 @@ extension FeedCollectionViewController {
 }
 
 // MARK: UICollectionViewDelegateFlowLayout
-extension FeedCollectionViewController {
+extension FeedCollectionViewController: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let dataSource = feedDataSource else {
             return .zero
