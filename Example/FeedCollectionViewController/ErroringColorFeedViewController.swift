@@ -10,9 +10,10 @@ import UIKit
 import FeedCollectionViewController
 import ImageFeedCollectionViewController
 
-// Default error message. Used in testing
-var errorMessage: String = "Something went wrong"
 class ErroringColorFeedViewController: ColorFeedViewController {
+    // Default error message. Used in testing
+    static var errorMessage = "Something went wrong"
+
     private class CustomErrorDataSource: ErrorDataSource {
         func getErrorMessage(error: Error?) -> String {
             return errorMessage
@@ -23,7 +24,8 @@ class ErroringColorFeedViewController: ColorFeedViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         errorDataSource = errorSource
-        ColorFeedViewController.length = -1
+        // in the error case we have no data
+        length = -1
     }
 
     func refreshFeed() {

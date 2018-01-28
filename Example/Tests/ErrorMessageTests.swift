@@ -24,7 +24,7 @@ class ErrorMessageTests: FBSnapshotTestCase {
         )
         // Reset the default error message
         // TODO: doesn't feel good to have this static variable
-        errorMessage = "Something went wrong"
+        ErroringColorFeedViewController.errorMessage = "Something went wrong"
         let instantiated = storyboard.instantiateViewController(
             withIdentifier: "ErroringColorFeedViewController"
         ) as? ErroringColorFeedViewController
@@ -57,24 +57,22 @@ class ErrorMessageTests: FBSnapshotTestCase {
     }
 
     func testErrorMessages() {
-        ColorFeedViewController.length = -1
         testDisplay()
     }
 
     func testCustomErrorMessage() {
-        ColorFeedViewController.length = -1
-        errorMessage = "Something went wrong. Please try again later."
+        ErroringColorFeedViewController.errorMessage = "Something went wrong. Please try again later."
         c.refreshFeed()
         testDisplay()
     }
 
     func testHidingMessage() {
-        ColorFeedViewController.length = -1
         c.refreshFeed()
         let expect = expectation(description: "Wait for refresh to finish")
         // must wait for previous refresh to finish before reloading again
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            ColorFeedViewController.length = 50
+            // reload again with images
+            self.c.length = 50
             self.c?.refreshFeed()
             // wait for images to load
             DispatchQueue.main.async {

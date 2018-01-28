@@ -41,7 +41,7 @@ class SingleImageViewTests: FBSnapshotTestCase {
             return
         }
         window.rootViewController = c
-        ColorFeedViewController.length = 50
+        c.length = 50
     }
     
     override func tearDown() {
