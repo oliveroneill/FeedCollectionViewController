@@ -3,7 +3,6 @@
 //  FeedViewController
 //
 //  Created by Oliver ONeill on 16/12/2016.
-//  Copyright © 2016 Oliver ONeill. All rights reserved.
 //
 
 /**

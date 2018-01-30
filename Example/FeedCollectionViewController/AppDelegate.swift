@@ -3,7 +3,6 @@
 //  FeedCollectionViewController
 //
 //  Created by Oliver on 12/20/2016.
-//  Copyright (c) 2016 Oliver. All rights reserved.
 //
 
 import UIKit

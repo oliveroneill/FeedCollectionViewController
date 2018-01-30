@@ -3,7 +3,6 @@
 //  FeedCollectionViewController
 //
 //  Created by Oliver ONeill on 21/12/2016.
-//  Copyright © 2016 CocoaPods. All rights reserved.
 //
 
 import UIKit

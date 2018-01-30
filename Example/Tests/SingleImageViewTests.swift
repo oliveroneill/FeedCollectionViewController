@@ -3,7 +3,6 @@
 //  FeedCollectionViewController
 //
 //  Created by Oliver ONeill on 2/01/2017.
-//  Copyright © 2017 CocoaPods. All rights reserved.
 //
 
 import XCTest

@@ -1,6 +1,6 @@
 //
 //  IDMCellBrowser.swift
-//  Pods
+//  ImageFeedCollectionViewController
 //
 //  Created by Oliver ONeill on 22/12/2016.
 //

@@ -1,8 +1,8 @@
 //
 //  AdjustingErrorView.swift
-//  DACircularProgress
+//  FeedViewController
 //
-//  Created by Oliver ONeill on 20/12/17.
+//  Created by Oliver ONeill on 16/12/2016.
 //
 
 import UIKit

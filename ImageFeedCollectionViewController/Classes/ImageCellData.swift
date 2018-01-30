@@ -1,6 +1,6 @@
 //
 //  ImageCellData.swift
-//  Pods
+//  ImageFeedCollectionViewController
 //
 //  Created by Oliver ONeill on 18/12/2016.
 //

@@ -1,6 +1,6 @@
 //
 //  SingleImageView.swift
-//  Pods
+//  ImageFeedCollectionViewController
 //
 //  Created by Oliver ONeill on 1/01/2017.
 //

@@ -1,6 +1,6 @@
 //
 //  ImageFeedCollectionViewController.swift
-//  Pods
+//  ImageFeedCollectionViewController
 //
 //  Created by Oliver ONeill on 17/12/2016.
 //
