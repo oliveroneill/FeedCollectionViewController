@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'ImageFeedCollectionViewController'
-  s.version          = '3.0.0'
+  s.version          = '3.0.1'
   s.summary          = 'An extension on FeedCollectionViewController that is used for image feeds'
 
   s.description      = <<-DESC
@@ -19,5 +19,5 @@ Instagram.
   s.source_files = 'ImageFeedCollectionViewController/Classes/**/*'
 
   s.dependency 'OOPhotoBrowser', '2.0.10'
-  s.dependency 'FeedCollectionViewController'
+  s.dependency 'FeedCollectionViewController', s.version.to_s
 end
