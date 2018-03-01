@@ -20,3 +20,5 @@ public extension ImageFeedPresenter {
         return SingleImageView(cell: cell)
     }
 }
+
+public class DefaultImageFeedPresenter: ImageFeedPresenter {}

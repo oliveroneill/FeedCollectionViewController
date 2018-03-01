@@ -28,6 +28,7 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController {
     // `FeedCollectionViewController`
     private var wrappedDataSource: WrappedFeedDataSource?
     private var wrappedDelegate: WrappedFeedDelegate?
+    private let defaultPresenter = DefaultImageFeedPresenter()
     /// Required to specify a data source
     open weak var imageFeedSource: ImageFeedDataSource? {
         didSet {
@@ -57,6 +58,8 @@ open class ImageFeedCollectionViewController: FeedCollectionViewController {
         // TODO: wrapping this delegate means that users of the library
         // cannot use it themselves
         feedDelegate = wrappedDelegate
+        // Ensure a default is set
+        imageFeedPresenter = imageFeedPresenter ?? defaultPresenter
     }
 
     // Add new views to the photo browser that will hide on tap
