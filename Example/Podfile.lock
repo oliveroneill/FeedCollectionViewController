@@ -5,15 +5,15 @@ PODS:
   - FBSnapshotTestCase/Core (2.1.4)
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
-  - FeedCollectionViewController (3.0.1)
-  - ImageFeedCollectionViewController (3.0.1):
-    - FeedCollectionViewController (= 3.0.1)
-    - OOPhotoBrowser (= 2.0.10)
-  - OOPhotoBrowser (2.0.10):
+  - FeedCollectionViewController (3.0.2)
+  - ImageFeedCollectionViewController (3.0.2):
+    - FeedCollectionViewController (= 3.0.2)
+    - OOPhotoBrowser (= 2.0.11)
+  - OOPhotoBrowser (2.0.11):
     - DACircularProgress
     - pop
-    - SDWebImage
-  - pop (1.0.10)
+    - SDWebImage (= 4.2.3)
+  - pop (1.0.12)
   - SDWebImage (4.2.3):
     - SDWebImage/Core (= 4.2.3)
   - SDWebImage/Core (4.2.3)
@@ -40,12 +40,12 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  FeedCollectionViewController: f75b5919391505daab26114d5c00c58ba73b6a45
-  ImageFeedCollectionViewController: 44c0d09b4b60e1f9f58e12c3ff4bc8a3cb7f2d1d
-  OOPhotoBrowser: f17de718049a314a72913d6891d66ad57f866ed3
-  pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
+  FeedCollectionViewController: ea87fba974de4695f6f5c10d83c3f31a07a97acb
+  ImageFeedCollectionViewController: 8ad0d215a433745816301917f12e6927f252f10c
+  OOPhotoBrowser: 0057c878130f6c0495e565cf23a3b5f8891582f4
+  pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
 
 PODFILE CHECKSUM: b4635fccb3d10a2b704ebc0e5ef92f84f83d660c
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1
